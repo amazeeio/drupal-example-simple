@@ -29,17 +29,6 @@ function _deny_message() {
 }
 
 /**
- * Implements drush_hook_COMMAND_validate().
- *
- * Encourage people to use config_installer instead of no profile
- */
-function drush_policy_site_install_validate($profile = null) {
-  if ($profile != "config_installer" && !drush_get_option('force')) {
-    return drush_set_error('POLICY_PM_DENY', dt("This Drupal is configured with config_installer. Please use `drush site-install config_installer` or overwrite with `--force` if you know what you do."));
-  }
-}
-
-/**
  * Implements hook_drush_help_alter().
  */
 function policy_drush_help_alter(&$command) {
