@@ -16,15 +16,15 @@
         }
     ],
     "require": {
+        "amazeeio/drupal-integrations": "@dev",
         "composer/installers": "^1.2",
+        "cweagans/composer-patches": "~1.0",
+        "drupal/console": "~1.0",
         "drupal/core-composer-scaffold": "^8.8",
         "drupal/core-project-message": "^8.8",
         "drupal/core-recommended": "^8.8",
-        "cweagans/composer-patches": "~1.0",
         "drush/drush": "~8.0",
-        "drupal/console": "~1.0",
-        "zaporylie/composer-drupal-optimizations": "^1.1",
-        "amazeeio/drupal-integrations": "@dev"
+        "zaporylie/composer-drupal-optimizations": "^1.1"
     },
     "require-dev": {
         "drupal/core-dev-pinned": "^8.8"
@@ -34,6 +34,9 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "config":{
+        "sort-packages": true
+    },
     "extra": {
         "installer-paths": {
             "web/core": ["type:drupal-core"],
