@@ -17,12 +17,14 @@
     ],
     "require": {
         "composer/installers": "^1.2",
-        "cweagans/composer-patches": "~1.0",
         "drupal/core-composer-scaffold": "^8.8",
+        "drupal/core-project-message": "^8.8",
         "drupal/core-recommended": "^8.8",
+        "cweagans/composer-patches": "~1.0",
         "drush/drush": "~8.0",
         "drupal/console": "~1.0",
-        "zaporylie/composer-drupal-optimizations": "^1.1"
+        "zaporylie/composer-drupal-optimizations": "^1.1",
+        "amazeeio/drupal-integrations": "@dev"
     },
     "require-dev": {
         "drupal/core-dev-pinned": "^8.8"
@@ -30,28 +32,8 @@
     "conflict": {
         "drupal/drupal": "*"
     },
-    "minimum-stability": "alpha",
+    "minimum-stability": "dev",
     "prefer-stable": true,
-    "autoload": {
-        "classmap": [
-            "scripts/composer/ScriptHandler.php"
-        ]
-    },
-    "scripts": {
-        "nuke": "rm -r -f composer.lock bin app vendor",
-        "pre-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
-        ],
-        "pre-update-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
-        ],
-        "post-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
-        ],
-        "post-update-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
-        ]
-    },
     "extra": {
         "installer-paths": {
             "web/core": ["type:drupal-core"],
@@ -64,6 +46,9 @@
             "web/themes/custom/{$name}": ["type:drupal-custom-theme"]
         },
         "drupal-scaffold": {
+            "allowed-packages": [
+                "amazeeio/drupal-integrations"
+            ],            
             "locations": {
                 "web-root": "web/"
             },
