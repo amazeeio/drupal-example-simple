@@ -19,7 +19,6 @@
         "amazeeio/drupal-integrations": "@dev",
         "composer/installers": "^1.2",
         "cweagans/composer-patches": "~1.0",
-        "drupal/console": "~1.0",
         "drupal/core-composer-scaffold": "^8.8",
         "drupal/core-project-message": "^8.8",
         "drupal/core-recommended": "^8.8",
