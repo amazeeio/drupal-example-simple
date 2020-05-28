@@ -1,0 +1,55 @@
+# PHP CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-php/ for more details
+#
+version: 2
+jobs:
+  composer:
+    docker:
+      - image: circleci/php:cli
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "composer.json" }}
+            - v1-dependencies-
+      - run: composer install -n --prefer-dist --ignore-platform-reqs
+      - save_cache:
+          key: v1-dependencies-{{ checksum "composer.json" }}
+          paths:
+            - ./vendor
+
+      # run tests
+      - run: composer validate
+  
+  docker-compose:
+    docker:
+      - image: circleci/php:cli
+
+    steps:
+      - checkout
+      - setup_remote_docker
+
+      # build docker compose project
+      - run:
+          name: Update codebase to follow CI configuration
+          command: |
+            sed -i -e "/###/d" docker-compose.yml
+      - run: docker network create amazeeio-network
+      - run: docker-compose up -d
+
+      # run tests
+      - run: docker-compose exec cli curl -Ls http://nginx:8080 | grep -i "Install site"
+
+  # lagoon-deploy:
+  # @todo - test deployment to lagoon.
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - composer
+      - docker-compose
