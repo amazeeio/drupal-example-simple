@@ -1,7 +1,5 @@
-# PHP CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-php/ for more details
-#
+# CircleCI configuration file
+
 version: 2
 jobs:
   composer:
@@ -42,6 +40,12 @@ jobs:
       - run: docker-compose up -d
 
       # run tests
+      - run: |
+          until docker-compose logs mariadb | grep -i "ready for connections"
+          do
+            echo "Waiting for the mariadb ..."
+            sleep 1
+          done
       - run: docker-compose exec cli curl -Ls http://nginx:8080 | grep -i "Install site"
 
   # lagoon-deploy:
