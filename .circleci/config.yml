@@ -53,7 +53,18 @@ jobs:
 
 workflows:
   version: 2
-  workflow:
+  commit:
+    jobs:
+      - composer
+      - docker-compose
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
     jobs:
       - composer
       - docker-compose
