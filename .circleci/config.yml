@@ -41,7 +41,7 @@ jobs:
           command: |
             sed -i -e "/###/d" docker-compose.yml
       - run: docker network prune -f && docker network inspect amazeeio-network >/dev/null || docker network create amazeeio-network
-      - run: docker-compose up -d
+      - run: docker-compose up -d --quiet-pull 
 
       # ensure DB is up prior to install
       - run:
@@ -68,6 +68,12 @@ jobs:
             docker-compose exec cli drush sqlq 'SHOW VARIABLES LIKE "%version%";'
             docker-compose exec cli drush st
             docker-compose exec cli drush pml
+
+      # remove the built site - comment this out on local to view it at http:// circleci.docker.amazee.io
+      - run: 
+          name: Stops containers and removes containers, networks, volumes, and images created by up
+          command: docker-compose down --volumes --remove-orphans
+
 
   # lagoon-deploy:
   # @todo - test deployment to lagoon.
