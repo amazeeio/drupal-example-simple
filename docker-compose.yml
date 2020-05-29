@@ -2,20 +2,20 @@ version: '2.3'
 
 x-lagoon-project:
   # Lagoon project name (leave `&lagoon-project` when you edit this)
-  &lagoon-project drupal-example-simple
+  &lagoon-project ${COMPOSE_PROJECT_NAME:-drupal8-example-simple}
 
 x-volumes:
   &default-volumes
     # Define all volumes you would like to have real-time mounted into the docker containers
     volumes:
       - .:/app:delegated ### Local overrides to mount host filesystem. Automatically removed in CI and PROD.
-      - /app/sites/default/files
+      - files:/app/web/sites/default/files
 
 x-environment:
   &default-environment
     LAGOON_PROJECT: *lagoon-project
     # Route that should be used locally, if you are using pygmy, this route *must* end with .docker.amazee.io
-    LAGOON_ROUTE: &default-url ${LOCALDEV_URL:-http://local.docker.amazee.io}
+    LAGOON_ROUTE: &default-url http://${COMPOSE_PROJECT_NAME:-drupal8-example-simple}.docker.amazee.io
     # Uncomment if you like to have the system behave like in production
     #LAGOON_ENVIRONMENT_TYPE: production
     # Uncomment to enable xdebug and then restart via `docker-compose up -d`
@@ -25,6 +25,10 @@ x-user:
   &default-user
     # The default user under which the containers should run. Change this if you are on linux and run with another user than id `1000`
     user: '1000'
+
+volumes:
+  files:
+    {}
 
 services:
 
