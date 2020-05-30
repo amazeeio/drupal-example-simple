@@ -50,14 +50,13 @@
         "drupal-scaffold": {
             "allowed-packages": [
                 "amazeeio/drupal-integrations"
-            ],            
+            ],
+            "file-mapping": {
+                "[web-root]/sites/default/all.settings.php": "assets/all.settings.php"
+            },
             "locations": {
                 "web-root": "web/"
-            },
-            "excludes": [
-                "sites/development.services.yml",
-                "sites/example.settings.local.php"
-            ]
+            }
         }
     }
 }
