@@ -2,7 +2,7 @@
 // Don't change anything here, it's magic!
 
 global $aliases_stub;
-if (empty($aliases_stub)) {
+if (getenv('LAGOON_REMOTE_ALIASES') === 'enabled' && empty($aliases_stub)) {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_AUTOREFERER, TRUE);
     curl_setopt($ch, CURLOPT_HEADER, 0);

@@ -16,9 +16,11 @@
         }
     ],
     "require": {
+        "amazeeio/drupal-integrations": "@dev",
         "composer/installers": "^1.2",
         "cweagans/composer-patches": "~1.0",
         "drupal/core-composer-scaffold": "^9.0",
+        "drupal/core-project-message": "^9.0",
         "drupal/core-recommended": "^9.0",
         "drush/drush": "~10.0",
         "zaporylie/composer-drupal-optimizations": "^1.1"
@@ -29,27 +31,10 @@
     "conflict": {
         "drupal/drupal": "*"
     },
-    "minimum-stability": "alpha",
+    "minimum-stability": "dev",
     "prefer-stable": true,
-    "autoload": {
-        "classmap": [
-            "scripts/composer/ScriptHandler.php"
-        ]
-    },
-    "scripts": {
-        "nuke": "rm -r -f composer.lock bin app vendor",
-        "pre-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
-        ],
-        "pre-update-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
-        ],
-        "post-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
-        ],
-        "post-update-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
-        ]
+    "config":{
+        "sort-packages": true
     },
     "extra": {
         "installer-paths": {
@@ -63,13 +48,15 @@
             "web/themes/custom/{$name}": ["type:drupal-custom-theme"]
         },
         "drupal-scaffold": {
+            "allowed-packages": [
+                "amazeeio/drupal-integrations"
+            ],
+            "file-mapping": {
+                "[web-root]/sites/default/all.settings.php": "assets/all.settings.php"
+            },
             "locations": {
                 "web-root": "web/"
-            },
-            "excludes": [
-                "sites/development.services.yml",
-                "sites/example.settings.local.php"
-            ]
+            }
         }
     }
 }

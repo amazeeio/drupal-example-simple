@@ -1,0 +1,153 @@
+# CircleCI configuration file
+
+version: 2.1
+
+commands:
+  install_and_check:
+    description: "Install Drupal and check it works"
+    steps:
+      # build docker compose project and setup network
+      - run:
+          name: Update codebase to follow CI configuration
+          command: |
+            sed -i -e "/###/d" docker-compose.yml
+      - run: docker network prune -f && docker network inspect amazeeio-network >/dev/null || docker network create amazeeio-network
+      - run: docker-compose up -d
+      # ensure DB is up prior to install
+      - run:
+          name: Check mariadb is responsive with dockerize
+          command: docker run --net circleci_default jwilder/dockerize dockerize -wait tcp://mariadb:3306 -timeout 1m
+      # install Drupal demo_umami profile
+      - run: 
+          name: Ensure all modules are installed and test install Drupal
+          command: |
+            docker-compose exec cli composer install
+            docker-compose exec cli drush si -y demo_umami --site-name="Lagoon CI Umami"
+      # check that the site is installed
+      - run: 
+          name: Check page title matches site-name
+          command: docker-compose exec cli curl -Ls http://nginx:8080 | grep -i "Lagoon CI Umami"
+      # perform some informational checks
+      - run:
+          name: Get environment, site and module version status
+          command: |
+            docker-compose exec cli php -v
+            docker-compose exec cli drush sqlq 'SHOW VARIABLES LIKE "%version%";'
+            docker-compose exec cli drush st
+            docker-compose exec cli drush pml
+  remove_all:
+    description: "Remove all containers etc"
+    steps:
+      - run: 
+          name: Stops and removes circleci containers, images, networks and volumes created by docker-compose up
+          command: |
+            docker-compose -p circleci down -v --remove-orphans
+            docker image rm circleci_php circleci_nginx circleci || true
+  pull_tags:
+    description: "pull images from amazeeiolagoon dockerhub"
+    parameters:
+      branch:
+        type: string
+        default: "master"
+    steps:
+      - run:
+          name: Update docker images to master branch
+          command: |
+            docker pull --quiet amazeeiolagoon/php:7.4-fpm-<< parameters.branch >>
+            docker image tag amazeeiolagoon/php:7.4-fpm-<< parameters.branch >> amazeeio/php:7.4-fpm
+            docker pull --quiet amazeeiolagoon/php:7.4-cli-drupal-<< parameters.branch >>
+            docker image tag amazeeiolagoon/php:7.4-cli-drupal-<< parameters.branch >> amazeeio/php:7.4-cli-drupal
+            docker pull --quiet amazeeiolagoon/nginx-drupal:<< parameters.branch >>
+            docker image tag amazeeiolagoon/nginx-drupal:<< parameters.branch >> amazeeio/nginx-drupal
+            docker pull --quiet amazeeiolagoon/mariadb-drupal:<< parameters.branch >>
+            docker image tag amazeeiolagoon/mariadb-drupal:<< parameters.branch >> amazeeio/mariadb-drupal
+executors:
+  php_docker:
+    docker:
+      - image: circleci/php:cli
+        user: root
+        environment:
+          COMPOSER_ALLOW_SUPERUSER: 1
+          COMPOSE_PROJECT_NAME: circleci
+
+jobs:
+  composer:
+    executor: php_docker
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "composer.json" }}
+            - v1-dependencies-
+      - run: composer install -n --prefer-dist --ignore-platform-reqs
+      - save_cache:
+          key: v1-dependencies-{{ checksum "composer.json" }}
+          paths:
+            - ./vendor
+      # run tests
+      - run: composer validate
+  
+  docker-compose:
+    executor: php_docker
+    steps:
+      - checkout
+      - setup_remote_docker
+      - install_and_check
+
+  docker-compose-down:
+    executor: php_docker
+    steps:
+      - checkout
+      - setup_remote_docker
+      - remove_all
+
+  docker-compose-latest:
+    executor: php_docker
+    steps:
+      - checkout
+      - setup_remote_docker
+      - remove_all
+      - pull_tags:
+          branch: "pr-1901"
+
+      # - run:
+      #     name: Update docker images to master branch
+      #     command: |
+      #       docker pull --quiet amazeeiolagoon/php:7.4-fpm-master
+      #       docker image tag amazeeiolagoon/php:7.4-fpm-master amazeeio/php:7.4-fpm
+      #       docker pull --quiet amazeeiolagoon/php:7.4-cli-drupal-master
+      #       docker image tag amazeeiolagoon/php:7.4-cli-drupal-master amazeeio/php:7.4-cli-drupal
+      #       docker pull --quiet amazeeiolagoon/nginx-drupal:master
+      #       docker image tag amazeeiolagoon/nginx-drupal:master amazeeio/nginx-drupal
+      #       docker pull --quiet amazeeiolagoon/mariadb-drupal:master
+      #       docker image tag amazeeiolagoon/mariadb-drupal:master amazeeio/mariadb-drupal
+      - install_and_check
+      - run:
+          name: Retag latest images
+          command: |
+            docker pull amazeeio/php:7.4-fpm
+            docker pull amazeeio/php:7.4-cli-drupal
+            docker pull amazeeio/nginx-drupal
+            docker pull amazeeio/mariadb-drupal
+      - remove_all
+
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - composer
+      - docker-compose
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - 8.x
+    jobs:
+      - composer
+      - docker-compose
+      - docker-compose-latest
+      - docker-compose-down
