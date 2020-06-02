@@ -11,15 +11,6 @@ tasks:
 
   post-rollout:
     - run:
-        name: IF no Drupal installed and we are not master branch, sync from master brancy
-        command: |
-            if tables=$(drush sqlq 'show tables;') && [ -z "$tables" ] && [[ "$LAGOON_GIT_BRANCH" != "master" ]]; then
-                # no drupal installed, sync DB from master branch
-                drush -y sql-sync @master @self
-            fi
-        service: cli
-        shell: bash
-    - run:
         name: drush cim
         command: drush -y cim
         service: cli
@@ -35,7 +26,10 @@ tasks:
 
 
 environments:
-  master:
+  9.x:
+    routes:
+      - nginx:
+        - drupal9.amazee.io
     cronjobs:
       - name: drush cron
         schedule: "*/15 * * * *"
