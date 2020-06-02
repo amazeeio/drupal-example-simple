@@ -29,7 +29,15 @@ environments:
   9.x:
     routes:
       - nginx:
-        - drupal9.amazee.io
+        - drupal9.amazee.io:
+            annotations:
+              nginx.ingress.kubernetes.io/server-snippet: |
+                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
+                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
+                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
+                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
+                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
+                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
     cronjobs:
       - name: drush cron
         schedule: "*/15 * * * *"
