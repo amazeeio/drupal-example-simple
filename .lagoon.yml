@@ -38,6 +38,7 @@ environments:
                 add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
                 add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
                 add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
+                add_header X-Drupal "#Drupal9 on Lagoon #CelebrateDrupal";
     cronjobs:
       - name: drush cron
         schedule: "*/15 * * * *"
