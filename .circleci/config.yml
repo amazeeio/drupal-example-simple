@@ -16,7 +16,7 @@ commands:
       # ensure DB is up prior to install
       - run:
           name: Check mariadb is responsive with dockerize
-          command: docker run --net circleci_default jwilder/dockerize dockerize -wait tcp://mariadb:3306 -timeout 1m
+          command: docker run --rm --net circleci_default jwilder/dockerize dockerize -wait tcp://mariadb:3306 -timeout 1m
       # install Drupal demo_umami profile
       - run: 
           name: Ensure all modules are installed and test install Drupal
@@ -109,19 +109,7 @@ jobs:
       - setup_remote_docker
       - remove_all
       - pull_tags:
-          branch: "pr-1901"
-
-      # - run:
-      #     name: Update docker images to master branch
-      #     command: |
-      #       docker pull --quiet amazeeiolagoon/php:7.4-fpm-master
-      #       docker image tag amazeeiolagoon/php:7.4-fpm-master amazeeio/php:7.4-fpm
-      #       docker pull --quiet amazeeiolagoon/php:7.4-cli-drupal-master
-      #       docker image tag amazeeiolagoon/php:7.4-cli-drupal-master amazeeio/php:7.4-cli-drupal
-      #       docker pull --quiet amazeeiolagoon/nginx-drupal:master
-      #       docker image tag amazeeiolagoon/nginx-drupal:master amazeeio/nginx-drupal
-      #       docker pull --quiet amazeeiolagoon/mariadb-drupal:master
-      #       docker image tag amazeeiolagoon/mariadb-drupal:master amazeeio/mariadb-drupal
+          branch: "master"
       - install_and_check
       - run:
           name: Retag latest images
@@ -145,7 +133,7 @@ workflows:
           filters:
             branches:
               only:
-                - 8.x
+                - 9.x
     jobs:
       - composer
       - docker-compose

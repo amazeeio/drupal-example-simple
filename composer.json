@@ -22,6 +22,7 @@
         "drupal/core-composer-scaffold": "^9.0",
         "drupal/core-project-message": "^9.0",
         "drupal/core-recommended": "^9.0",
+        "drupal/lagoon_logs": "^1.1",
         "drush/drush": "~10.0",
         "zaporylie/composer-drupal-optimizations": "^1.1"
     },
