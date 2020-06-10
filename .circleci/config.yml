@@ -41,6 +41,7 @@ commands:
       - run: 
           name: Stops and removes circleci containers, images, networks and volumes created by docker-compose up
           command: |
+            sed -i -e "/###/d" docker-compose.yml
             docker-compose -p circleci down -v --remove-orphans
             docker image rm circleci_php circleci_nginx circleci || true
   pull_tags:
