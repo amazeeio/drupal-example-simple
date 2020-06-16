@@ -100,6 +100,27 @@ services:
     environment:
       << : *default-environment
 
+  redis:
+    image: amazeeio/redis
+    labels:
+      lagoon.type: redis
+      lando.type: redis
+    ports:
+      - "6379" # exposes the port 6379 with a random local port, find it with `docker-compose port redis 6379`
+    << : *default-user # uses the defined user from top
+    environment:
+      << : *default-environment
+
+  solr:
+    image: amazeeio/solr:7.7-drupal
+    labels:
+      lagoon.type: solr
+      lando.type: solr-drupal
+    ports:
+      - "8983" # exposes the port 8983 with a random local port, find it with `docker-compose port solr 8983`
+    environment:
+      << : *default-environment
+
 networks:
   amazeeio-network:
     external: true
