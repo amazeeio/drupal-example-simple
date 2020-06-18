@@ -12,6 +12,8 @@
 // the Drupal root, which is protected by amazee.io Nginx configs, so it cannot be read
 // via the browser. If your Drupal root is inside a subfolder (like 'web') you can put the config
 // folder outside this subfolder for an advanced security measure: '../config/sync'.
+use Drupal\Core\Installer\InstallerKernel;
+
 $settings['config_sync_directory'] = '../config/sync';
 
 if (getenv('LAGOON_ENVIRONMENT_TYPE') !== 'production') {
@@ -59,7 +61,7 @@ $redis_host = getenv('REDIS_HOST') ?: 'redis';
 $redis_port = getenv('REDIS_SERVICE_PORT') ?: 6379;
 try {
     # Do not use the cache during installations of Drupal.
-    if (drupal_installation_attempted()) {
+    if (InstallerKernel::installationAttempted()) {
     throw new \Exception('Drupal installation underway.');
     }
 
