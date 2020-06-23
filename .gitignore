@@ -17,3 +17,4 @@ web/sites/simpletest
 /.idea/
 /.editorconfig
 /.gitattributes
+/.drush-lock-update
