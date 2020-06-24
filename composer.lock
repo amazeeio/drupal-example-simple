@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a151d753f0d22af869f1cfa4d8c367c2",
+    "content-hash": "8d2927534c3938fb822d318d30922d6b",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
-            "version": "0.0.1",
+            "version": "0.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amazeeio/drupal-integrations.git",
-                "reference": "ae9e64d180adc7848cbc9507d55d4e824ef99847"
+                "reference": "71c4c790c071bfdad83cbaef4eb51b2b3d004208"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amazeeio/drupal-integrations/zipball/ae9e64d180adc7848cbc9507d55d4e824ef99847",
-                "reference": "ae9e64d180adc7848cbc9507d55d4e824ef99847",
+                "url": "https://api.github.com/repos/amazeeio/drupal-integrations/zipball/71c4c790c071bfdad83cbaef4eb51b2b3d004208",
+                "reference": "71c4c790c071bfdad83cbaef4eb51b2b3d004208",
                 "shasum": ""
             },
             "conflict": {
@@ -48,7 +48,7 @@
                 "MIT"
             ],
             "description": "Add this project to any Drupal distribution based on drupal/core-composer-scaffold to enable it for use on Lagoon.",
-            "time": "2020-06-24T04:09:12+00:00"
+            "time": "2020-06-24T12:01:41+00:00"
         },
         {
             "name": "asm89/stack-cors",
