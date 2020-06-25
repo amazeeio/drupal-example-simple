@@ -16,10 +16,9 @@
         }
     ],
     "require": {
-        "amazeeio/drupal_integrations": "^0.2.2",
+        "amazeeio/drupal_integrations": "^0.2.3",
         "composer/installers": "^1.2",
         "cweagans/composer-patches": "~1.0",
-        "drupal/core-composer-scaffold": "^9.0",
         "drupal/core-project-message": "^9.0",
         "drupal/core-recommended": "^9.0",
         "drupal/lagoon_logs": "^1.1",
