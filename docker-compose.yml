@@ -89,13 +89,24 @@ services:
     environment:
       << : *default-environment # loads the defined environment variables from the top
 
-  mariadb:
-    image: amazeeiolagoon/mariadb-drupal:pr-892
+  # mariadb:
+  #   image: amazeeio/mariadb-drupal
+  #   labels:
+  #     lagoon.type: mariadb
+  #     lando.type: mariadb-drupal
+  #   ports:
+  #     - "3306" # exposes the port 3306 with a random local port, find it with `docker-compose port mariadb 3306`
+  #   << : *default-user # uses the defined user from top
+  #   environment:
+  #     << : *default-environment
+
+  postgres:
+    image: amazeeio/postgres-drupal
     labels:
-      lagoon.type: mariadb
-      lando.type: mariadb-drupal
+      lagoon.type: postgres
+      lando.type: postgres-drupal
     ports:
-      - "3306" # exposes the port 3306 with a random local port, find it with `docker-compose port mariadb 3306`
+      - "5432" # exposes the port 3306 with a random local port, find it with `docker-compose port mariadb 3306`
     << : *default-user # uses the defined user from top
     environment:
       << : *default-environment
