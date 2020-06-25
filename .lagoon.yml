@@ -17,6 +17,7 @@ tasks:
               # no drupal installed, sync DB from master branch
               drush -y sql-sync @master @self
           fi
+        service: cli
     - run:
         name: drush cim
         command: drush -y cim
