@@ -1,0 +1,11 @@
+dev:
+  host: ssh.lagoon.amazeeio.cloud
+  options:
+    backup-dir: /tmp
+    command-specific:
+      sql-sync:
+        no-ordered-dump: true
+  root: /app/web
+  user: drupal9-example-simple-pr-2
+  ssh:
+    options: '-o LogLevel=ERROR -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p 32222'
