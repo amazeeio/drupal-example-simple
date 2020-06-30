@@ -9,7 +9,7 @@ features:
   favicon: true
   node_user_picture: true
 logo:
-  path: 'public://ada_small.jpg'
+  path: ''
   url: ''
   use_default: true
 _core:
