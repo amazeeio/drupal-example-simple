@@ -1,0 +1,23 @@
+uuid: ab9b4d99-1dad-49db-b153-507e64ab2a19
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - claro
+id: sitebranding
+theme: claro
+region: header
+weight: 0
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  provider: system
+  label_display: '0'
+  use_site_logo: true
+  use_site_name: true
+  use_site_slogan: true
+visibility: {  }
