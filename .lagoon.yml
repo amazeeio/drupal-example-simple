@@ -34,7 +34,7 @@ tasks:
 
 
 environments:
-  9.x:
+  master:
     routes:
       - nginx:
         - drupal9.amazee.io:
