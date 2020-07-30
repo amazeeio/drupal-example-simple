@@ -13,8 +13,8 @@ tasks:
     - run:
         name: IF no Drupal installed run drush site-install
         command: |
-          if tables=$(drush sqlq 'show tables;') && [ -z "$tables" ] && [[ "$LAGOON_GIT_BRANCH" != "main" ]]; then
-              drush -y si
+          if ! drush status --fields=bootstrap | grep -q "Successful"; then
+              drush si config_installer -y --account-name=admin --account-pass=admin install_configure_form.enable_update_status_module=NULL install_configure_form.enable_update_status_emails=NULL
           fi
         service: cli  
     - run:
