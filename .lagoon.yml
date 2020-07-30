@@ -11,6 +11,13 @@ tasks:
 
   post-rollout:
     - run:
+        name: IF no Drupal installed run drush site-install
+        command: |
+          if tables=$(drush sqlq 'show tables;') && [ -z "$tables" ] && [[ "$LAGOON_GIT_BRANCH" != "main" ]]; then
+              drush -y si
+          fi
+        service: cli  
+    - run:
         name: drush cim
         command: drush -y cim
         service: cli
