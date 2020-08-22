@@ -85,7 +85,7 @@ services:
       << : *default-environment # loads the defined environment variables from the top
 
   mariadb:
-    image: amazeeiolagoon/mariadb-drupal:pr-892
+    image: amazeeio/mariadb-drupal
     labels:
       lagoon.type: mariadb
       lando.type: mariadb-drupal
