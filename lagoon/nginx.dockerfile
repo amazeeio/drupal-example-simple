@@ -4,7 +4,7 @@ FROM ${CLI_IMAGE} as cli
 FROM amazeeio/nginx-drupal
 
 RUN echo "~^a\.domain                 https://www.example.com\$request_uri;" >> /etc/nginx/redirects-map.conf
-RUN fix-permissions /etc/nginx
+RUN fix-permissions /usr/local/openresty/nginx/
 
 COPY --from=cli /app /app
 
