@@ -11,16 +11,8 @@ tasks:
 
   post-rollout:
     - run:
-        name: drush cim
-        command: drush -y cim
-        service: cli
-    - run:
-        name: drush updb
-        command: drush -y updb
-        service: cli
-    - run:
-        name: drush cr
-        command: drush -y cr
+        name: install demo_umami profile
+        command: drush -y si demo_umami
         service: cli
 
 
@@ -29,16 +21,7 @@ environments:
   9.x:
     routes:
       - nginx:
-        - drupal9.amazee.io:
-            annotations:
-              nginx.ingress.kubernetes.io/server-snippet: |
-                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
-                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
-                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
-                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
-                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
-                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
-                add_header X-Drupal "#Drupal9 on Lagoon #CelebrateDrupal";
+        - vu.au.amazee.io
     cronjobs:
       - name: drush cron
         schedule: "*/15 * * * *"
