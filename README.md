@@ -3,34 +3,66 @@
 This project template should provide a kickstart for managing your site
 dependencies with [Composer](https://getcomposer.org/). It is based on the [original Drupal Composer Template](https://github.com/drupal-composer/drupal-project), but includes everything necessary to run on amazee.io (either the local development environment or on amazee.io servers.)
 
-test2
-
 ## Requirements
 
-* [docker](https://docs.docker.com/install/).
-* [pygmy](https://docs.amazee.io/local_docker_development/pygmy.html) `gem install pygmy` (you might need sudo for this depending on your ruby configuration)
+* [docker](https://docs.docker.com/install/)
 
-## Local environment setup
 
-1. Checkout project repo and confirm the path is in docker's file sharing config - https://docs.docker.com/docker-for-mac/#file-sharing
+* [pygmy](https://pygmy.readthedocs.io/) `gem install pygmy` (you might need `sudo` for this depending on your Ruby configuration)
+ 
+**OR**
 
-```
-git clone https://github.com/amazeeio/drupal-example.git drupal8-lagoon && cd $_
-```
+* [Lando](https://docs.lando.dev/basics/installation.html#system-requirements)
+
+## Local environment setup - pygmy
+
+1. Checkout this project repo and confirm the path is in Docker's file sharing config - https://docs.docker.com/docker-for-mac/#file-sharing
+
+    ```bash
+    git clone https://github.com/amazeeio/drupal-simple-example.git drupal9-lagoon && cd $_
+    ```
 
 2. Make sure you don't have anything running on port 80 on the host machine (like a web server) then run `pygmy up`
 
-3. Build and start the build images
+3. Build and start the build images:
 
+    ```bash
+    docker-compose up -d
+    docker-compose exec cli composer install
+    ```
+
+4. Visit the new site @ `http://drupal-simple-example.docker.amazee.io`
+
+* If any steps fail, you're safe to rerun from any point.
+Starting again from the beginning will just reconfirm the changes.
+
+## Local environment setup - Lando
+
+This repository is set up with a `.lando.yml` file, which allows you to use Lando instead of pygmy for your local development environment.
+
+1. [Install Lando](https://docs.lando.dev/basics/installation.html#system-requirements).
+
+2. Checkout the project repo and confirm the path is in Docker's file sharing config - https://docs.docker.com/docker-for-mac/#file-sharing
+
+    ```bash
+    git clone https://github.com/amazeeio/drupal-simple-example.git drupal9-lagoon && cd $_
+    ```
+
+3. Make sure you have pygmy stopped. Run `pygmy stop` to be sure.
+
+4. We already have a Lando file in this repository, so we just need to run the following command to get Lando up:
+
+ ```bash
+lando start
 ```
-docker-compose up -d
-docker-compose exec cli composer install
+
+5. Install your Drupal site with Drush:
+
+```bash
+lando drush si -y
 ```
 
-4. Visit the new site @ `http://drupal-example.docker.amazee.io`
-
-* If any steps fail you're safe to rerun from any point,
-starting again from the beginning will just reconfirm the changes.
+6. And now we have a fully working local Drupal site on Lando! For more information on how to deploy your site, check out our documentation or our deployment demo.
 
 ## What does the template do?
 
@@ -98,6 +130,7 @@ achieve that by registering `@drupal-scaffold` as a post-install and post-update
     ]
 },
 ```
+
 ### How can I apply patches to downloaded modules?
 
 If you need to apply patches (depending on the project being modified, a pull
@@ -106,6 +139,7 @@ request is often a better solution), you can do so with the
 
 To add a patch to drupal module foobar insert the patches section in the extra
 section of composer.json:
+
 ```json
 "extra": {
     "patches": {
