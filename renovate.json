@@ -2,15 +2,17 @@
   "extends": [
     "config:base"
   ],
-  {
-  "datasources":[
-    "packagist"
-  ],
-  "packageNames":[
-    "drupal/core-dev-pinned",
-    "drupal/core-recommended",
-    "drupal/core-project-message"
-  ],
-  "groupName":"Drupal Core"
-},
+  "packageRules":[
+    {
+      "datasources":[
+        "packagist"
+      ],
+      "packageNames":[
+        "drupal/core-dev-pinned",
+        "drupal/core-recommended",
+        "drupal/core-project-message"
+      ],
+      "groupName":"Drupal Core"
+    }
+  ]
 }
