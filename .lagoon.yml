@@ -10,10 +10,11 @@ tasks:
 #         service: cli
 
   post-rollout:
-    - run:
-        name: drush cim
-        command: drush -y cim
-        service: cli
+    # Enable once config sync has been setup.
+    # - run:
+    #     name: drush cim
+    #     command: drush -y cim
+    #     service: cli
     - run:
         name: drush updb
         command: drush -y updb
