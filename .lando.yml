@@ -1,4 +1,4 @@
-name: drupal9-example-simple-lando
+name: drupal9-example-simple
 recipe: lagoon
 config:
   flavor: drupal
