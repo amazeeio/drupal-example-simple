@@ -10,7 +10,7 @@ x-volumes:
 x-environment:
   &default-environment
     # Route that should be used locally, if you are using pygmy, this route *must* end with .docker.amazee.io
-    LAGOON_ROUTE: &default-url http://${COMPOSE_PROJECT_NAME:-drupal-example-simple}.docker.amazee.io
+    LAGOON_ROUTE: &default-url http://${COMPOSE_PROJECT_NAME:-drupal9-example-advanced}.docker.amazee.io
     # Uncomment if you like to have the system behave like in production
     #LAGOON_ENVIRONMENT_TYPE: production
     # Uncomment to enable xdebug and then restart via `docker-compose up -d`
@@ -31,7 +31,7 @@ services:
     build:
       context: .
       dockerfile: lagoon/cli.dockerfile
-    image: &cli-image ${COMPOSE_PROJECT_NAME:-drupal-example-simple}-cli # this image will be reused as `CLI_IMAGE` in subsequent Docker builds
+    image: &cli-image ${COMPOSE_PROJECT_NAME:-drupal9-example-advanced}-cli # this image will be reused as `CLI_IMAGE` in subsequent Docker builds
     labels:
       # Lagoon Labels
       lagoon.type: cli-persistent
@@ -85,13 +85,34 @@ services:
       << : *default-environment # loads the defined environment variables from the top
 
   mariadb:
-    image: amazeeiolagoon/mariadb-drupal:pr-892
+    image: amazeeio/mariadb-drupal
     labels:
       lagoon.type: mariadb
       lando.type: mariadb-drupal
     ports:
       - "3306" # exposes the port 3306 with a random local port, find it with `docker-compose port mariadb 3306`
     << : *default-user # uses the defined user from top
+    environment:
+      << : *default-environment
+
+  redis:
+    image: amazeeio/redis
+    labels:
+      lagoon.type: redis
+      lando.type: redis
+    ports:
+      - "6379" # exposes the port 6379 with a random local port, find it with `docker-compose port redis 6379`
+    << : *default-user # uses the defined user from top
+    environment:
+      << : *default-environment
+
+  solr:
+    image: amazeeio/solr:7.7-drupal
+    labels:
+      lagoon.type: solr
+      lando.type: solr-drupal
+    ports:
+      - "8983" # exposes the port 8983 with a random local port, find it with `docker-compose port solr 8983`
     environment:
       << : *default-environment
 

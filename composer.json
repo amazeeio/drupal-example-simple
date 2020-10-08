@@ -19,14 +19,16 @@
         "amazeeio/drupal_integrations": "0.3.2",
         "composer/installers": "1.9.0",
         "cweagans/composer-patches": "1.6.7",
-        "drupal/core-project-message": "9.0.1",
-        "drupal/core-recommended": "9.0.1",
+        "drupal/core-recommended": "9.0.6",
         "drupal/lagoon_logs": "1.1.0",
+        "drupal/redis": "1.4.0",
+        "drupal/search_api": "1.17.0",
+        "drupal/search_api_solr": "4.1.6",
         "drush/drush": "10.3.0",
-        "zaporylie/composer-drupal-optimizations": "1.1.1"
+        "zaporylie/composer-drupal-optimizations": "1.1.2"
     },
     "require-dev": {
-        "drupal/core-dev-pinned": "9.0.1"
+        "drupal/core-dev-pinned": "9.0.6"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -52,7 +54,8 @@
                 "amazeeio/drupal_integrations"
             ],
             "file-mapping": {
-                "[web-root]/sites/default/all.settings.php": "assets/all.settings.php"
+                "[web-root]/sites/default/all.settings.php": "assets/all.settings.php",
+                "[web-root]/sites/default/redis-unavailable.services.yml": "assets/redis-unavailable.services.yml"
             },
             "locations": {
                 "web-root": "web/"
