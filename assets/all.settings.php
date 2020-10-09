@@ -14,6 +14,19 @@
 // folder outside this subfolder for an advanced security measure: '../config/sync'.
 $settings['config_sync_directory'] = '../config/sync';
 
+// Adds in a postgres default database - this overrides the mariadb set in settings.lagoon.php
+if(getenv('LAGOON')){
+    $databases['default']['default'] = array(
+      'driver' => 'pgsql',
+      'database' => getenv('POSTGRES_DATABASE') ?: 'drupal',
+      'username' => getenv('POSTGRES_USERNAME') ?: 'drupal',
+      'password' => getenv('POSTGRES_PASSWORD') ?: 'drupal',
+      'host' => getenv('POSTGRES_HOST') ?: 'postgres',
+      'port' => 5432,
+      'prefix' => '',
+    );
+  }
+
 if (getenv('LAGOON_ENVIRONMENT_TYPE') !== 'production') {
     /**
      * Skip file system permissions hardening.

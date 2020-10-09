@@ -10,7 +10,7 @@ x-volumes:
 x-environment:
   &default-environment
     # Route that should be used locally, if you are using pygmy, this route *must* end with .docker.amazee.io
-    LAGOON_ROUTE: &default-url http://${COMPOSE_PROJECT_NAME:-drupal9-example-simple}.docker.amazee.io
+    LAGOON_ROUTE: &default-url http://${COMPOSE_PROJECT_NAME:-drupal9-example-postgres}.docker.amazee.io
     # Uncomment if you like to have the system behave like in production
     #LAGOON_ENVIRONMENT_TYPE: production
     # Uncomment to enable xdebug and then restart via `docker-compose up -d`
@@ -31,7 +31,7 @@ services:
     build:
       context: .
       dockerfile: lagoon/cli.dockerfile
-    image: &cli-image ${COMPOSE_PROJECT_NAME:-drupal9-example-simple}-cli # this image will be reused as `CLI_IMAGE` in subsequent Docker builds
+    image: &cli-image ${COMPOSE_PROJECT_NAME:-drupal9-example-postgres}-cli # this image will be reused as `CLI_IMAGE` in subsequent Docker builds
     labels:
       # Lagoon Labels
       lagoon.type: cli-persistent
@@ -84,13 +84,24 @@ services:
     environment:
       << : *default-environment # loads the defined environment variables from the top
 
-  mariadb:
-    image: amazeeio/mariadb-drupal
+  # mariadb:
+  #   image: amazeeio/mariadb-drupal
+  #   labels:
+  #     lagoon.type: mariadb
+  #     lando.type: mariadb-drupal
+  #   ports:
+  #     - "3306" # exposes the port 3306 with a random local port, find it with `docker-compose port mariadb 3306`
+  #   << : *default-user # uses the defined user from top
+  #   environment:
+  #     << : *default-environment
+
+  postgres:
+    image: amazeeio/postgres-drupal
     labels:
-      lagoon.type: mariadb
-      lando.type: mariadb-drupal
+      lagoon.type: postgres
+      lando.type: postgres-drupal
     ports:
-      - "3306" # exposes the port 3306 with a random local port, find it with `docker-compose port mariadb 3306`
+      - "5432" # exposes the port 3306 with a random local port, find it with `docker-compose port mariadb 3306`
     << : *default-user # uses the defined user from top
     environment:
       << : *default-environment
