@@ -23,6 +23,10 @@
         "drupal/core-project-message": "8.9.2",
         "drupal/core-recommended": "8.9.2",
         "drupal/lagoon_logs": "1.1.0",
+        "drupal/lagoon_varnish": "1.1.0",
+        "drupal/redis": "1.4.0",
+        "drupal/search_api": "1.17.0",
+        "drupal/search_api_solr": "4.1.4",
         "drush/drush": "10.3.1",
         "zaporylie/composer-drupal-optimizations": "1.1.2"
     },
@@ -53,7 +57,8 @@
                 "amazeeio/drupal_integrations"
             ],
             "file-mapping": {
-                "[web-root]/sites/default/all.settings.php": "assets/all.settings.php"
+                "[web-root]/sites/default/all.settings.php": "assets/all.settings.php",
+                "[web-root]/sites/default/redis-unavailable.services.yml": "assets/redis-unavailable.services.yml"
             },
             "locations": {
                 "web-root": "web/"
