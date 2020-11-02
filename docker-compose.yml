@@ -85,7 +85,7 @@ services:
       << : *default-environment # loads the defined environment variables from the top
 
   mariadb:
-    image: amazeeio/mariadb-drupal
+    image: uselagoon/mariadb-drupal:latest
     labels:
       lagoon.type: mariadb
       lando.type: mariadb-drupal
@@ -96,7 +96,7 @@ services:
       << : *default-environment
 
   redis:
-    image: amazeeio/redis
+    image: uselagoon/redis-5:latest
     labels:
       lagoon.type: redis
       lando.type: redis
@@ -107,7 +107,7 @@ services:
       << : *default-environment
 
   solr:
-    image: amazeeio/solr:7.7-drupal
+    image: uselagoon/solr-7.7-drupal:latest
     labels:
       lagoon.type: solr
       lando.type: solr-drupal
