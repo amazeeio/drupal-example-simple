@@ -1,5 +1,5 @@
-Lagoon Drupal 8 advanced - php74, nginx, mariadb, solr, redis
-===========================================================
+Lando Drupal 8 advanced - php7.4, nginx, mariadb, solr, redis, varnish
+======================================================================
 
 This example exists primarily to test the following documentation:
 
@@ -35,6 +35,7 @@ lando drush status | grep "Drupal bootstrap" | grep "Successful"
 docker ps --filter label=com.docker.compose.project=drupal8exampleadvanced | grep Up | grep drupal8exampleadvanced_nginx_1
 docker ps --filter label=com.docker.compose.project=drupal8exampleadvanced | grep Up | grep drupal8exampleadvanced_mariadb_1
 docker ps --filter label=com.docker.compose.project=drupal8exampleadvanced | grep Up | grep drupal8exampleadvanced_mailhog_1
+docker ps --filter label=com.docker.compose.project=drupal8exampleadvanced | grep Up | grep drupal8exampleadvanced_varnish_1
 docker ps --filter label=com.docker.compose.project=drupal8exampleadvanced | grep Up | grep drupal8exampleadvanced_php_1
 docker ps --filter label=com.docker.compose.project=drupal8exampleadvanced | grep Up | grep drupal8exampleadvanced_cli_1
 docker ps --filter label=com.docker.compose.project=drupal8exampleadvanced | grep Up | grep drupal8exampleadvanced_solr_1
