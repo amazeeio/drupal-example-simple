@@ -1,21 +1,36 @@
 {
-  "baseBranches": ["9.x", "8.x", "9.x-advanced", "8.x-advanced", "9.x-postgres"],
-  "extends": [
-    "config:base"
+  "baseBranches": [
+    "9.x",
+    "8.x",
+    "9.x-advanced",
+    "8.x-advanced",
+    "9.x-postgres"
   ],
+  "extends": ["config:base"],
   "dependencyDashboard": true,
   "prHourlyLimit": 0,
-  "packageRules":[
+  "packageRules": [
     {
-      "datasources":[
-        "packagist"
-      ],
-      "packageNames":[
+      "datasources": ["packagist"],
+      "updateTypes": ["patch", "minor"],
+      "packageNames": [
         "drupal/core-dev-pinned",
         "drupal/core-recommended",
+        "drupal/core-composer-scaffold",
         "drupal/core-project-message"
       ],
-      "groupName":"Drupal Core"
+      "groupName": "Drupal Core"
+    },
+    {
+      "datasources": ["packagist"],
+      "updateTypes": ["major"],
+      "packageNames": [
+        "drupal/core-dev-pinned",
+        "drupal/core-recommended",
+        "drupal/core-composer-scaffold",
+        "drupal/core-project-message"
+      ],
+      "enabled": false
     }
   ]
 }
