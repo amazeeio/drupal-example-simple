@@ -1,4 +1,4 @@
-Lagoon Drupal 9 Simple - php74, nginx, mariadb
+Lando Drupal 9 Simple - php7.4, nginx, mariadb
 ==============================================
 
 This example exists primarily to test the following documentation:
@@ -70,7 +70,7 @@ lando yarn --version
 # Should have lagoon cli
 lando lagoon --version | grep lagoon
 
-# Should have a running Drupal 8 site served by nginx on port 8080
+# Should have a running Drupal 9 site served by nginx on port 8080
 lando ssh -s cli -c "curl -kL http://nginx:8080" | grep "Welcome to Drush Site-Install"
 
 # Should be able to db-export and db-import the database
