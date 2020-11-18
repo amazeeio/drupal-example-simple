@@ -10,11 +10,15 @@ Run the following commands to get up and running with this example.
 
 ```bash
 # Should remove any previous runs and poweroff
-docker-compose down
 sed -i -e "/###/d" docker-compose.yml
+docker network inspect amazeeio-network >/dev/null || docker network create amazeeio-network
+docker-compose down
 
 # Should start up our Lagoon Drupal 8 site successfully
 docker-compose build && docker-compose up -d
+
+# Ensure mariadb pod is ready to connect
+docker run --rm --net drupal8-example-advanced_default jwilder/dockerize dockerize -wait tcp://mariadb:3306 -timeout 1m
 ```
 
 Verification commands
