@@ -1,5 +1,5 @@
-Lagoon Drupal 9 postgres - php74, nginx, postgres
-===============================================
+Lando Drupal 9 Postgres - php7.4, nginx, postgres
+=================================================
 
 This example exists primarily to test the following documentation:
 
