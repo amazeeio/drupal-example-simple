@@ -1,4 +1,4 @@
-Lagoon Drupal 8 Simple - php74, nginx, mariadb
+Lando Drupal 8 Simple - php7.4, nginx, mariadb
 ==============================================
 
 This example exists primarily to test the following documentation:
