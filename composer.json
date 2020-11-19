@@ -24,7 +24,7 @@
         "drupal/lagoon_logs": "1.1.0",
         "drupal/redis": "1.4.0",
         "drupal/search_api": "1.18.0",
-        "drupal/search_api_solr": "4.1.9",
+        "drupal/search_api_solr": "4.1.10",
         "drush/drush": "10.3.6",
         "zaporylie/composer-drupal-optimizations": "1.2.0"
     },
