@@ -19,14 +19,14 @@
         "amazeeio/drupal_integrations": "0.3.3",
         "composer/installers": "v1.9.0",
         "cweagans/composer-patches": "1.7.0",
-        "drupal/core-project-message": "9.0.7",
-        "drupal/core-recommended": "9.0.7",
+        "drupal/core-project-message": "9.0.8",
+        "drupal/core-recommended": "9.0.8",
         "drupal/lagoon_logs": "1.1.0",
         "drush/drush": "10.3.5",
         "zaporylie/composer-drupal-optimizations": "1.2.0"
     },
     "require-dev": {
-        "drupal/core-dev-pinned": "9.0.7"
+        "drupal/core-dev-pinned": "9.0.8"
     },
     "conflict": {
         "drupal/drupal": "*"
