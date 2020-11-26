@@ -9,6 +9,7 @@ x-volumes:
 
 x-environment:
   &default-environment
+    LAGOON_PROJECT: &lagoon-project ${COMPOSE_PROJECT_NAME:-drupal8-example-advanced}
     # Route that should be used locally, if you are using pygmy, this route *must* end with .docker.amazee.io
     LAGOON_ROUTE: &default-url http://${COMPOSE_PROJECT_NAME:-drupal8-example-advanced}.docker.amazee.io
     # Uncomment if you like to have the system behave like in production
@@ -61,7 +62,7 @@ services:
       - cli # basically just tells docker-compose to build the cli first
     environment:
       << : *default-environment # loads the defined environment variables from the top
-      LAGOON_LOCALDEV_URL: *default-url
+      LAGOON_LOCALDEV_URL: nginx-${COMPOSE_PROJECT_NAME:-drupal8-example-advanced} # generate another route for nginx, by default we go to varnish
     networks:
       - amazeeio-network
       - default
