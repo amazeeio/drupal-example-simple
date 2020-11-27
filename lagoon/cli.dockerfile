@@ -1,8 +1,9 @@
-FROM uselagoon/php-7.4-cli-drupal:latest
+FROM testlagoon/php-8.0-cli-drupal:pr-47
 
 COPY composer.* /app/
 COPY assets /app/assets
-RUN COMPOSER_MEMORY_LIMIT=-1 composer install --no-dev
+RUN composer self-update --2 \
+    && composer install --no-dev --ignore-platform-reqs
 COPY . /app
 RUN mkdir -p -v -m775 /app/web/sites/default/files
     
