@@ -1,4 +1,4 @@
-name: drupal9-example-simple
+name: drupal9-example-php8
 recipe: lagoon
 config:
   flavor: drupal
