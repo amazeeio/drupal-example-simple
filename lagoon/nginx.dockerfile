@@ -1,7 +1,7 @@
 ARG CLI_IMAGE
 FROM ${CLI_IMAGE} as cli
 
-FROM testlagoon/nginx-drupal:pr-47
+FROM testlagoon/nginx-drupal:latest
 
 COPY --from=cli /app /app
 
