@@ -1,9 +1,8 @@
-FROM testlagoon/php-8.0-cli-drupal:pr-47
+FROM lagoon/php-8.0-cli-drupal
 
 COPY composer.* /app/
 COPY assets /app/assets
-RUN composer self-update --2 \
-    && composer install --no-dev --ignore-platform-reqs
+RUN composer install --prefer-dist --no-dev --ignore-platform-reqs --no-suggest --optimize-autoloader --apcu-autoloader
 COPY . /app
 RUN mkdir -p -v -m775 /app/web/sites/default/files
     
