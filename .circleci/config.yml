@@ -21,7 +21,7 @@ commands:
       - run: 
           name: Ensure all modules are installed and test install Drupal
           command: |
-            docker-compose exec cli composer install
+            docker-compose exec cli composer install --ignore-platform-reqs
             docker-compose exec cli drush si -y demo_umami --site-name="Lagoon CI Umami"
       # check that the site is installed
       - run: 
