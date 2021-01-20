@@ -46,7 +46,7 @@ This repository is set up with a `.lando.yml` file, which allows you to use Land
     git clone https://github.com/amazeeio/drupal-example-simple.git drupal9-lagoon && cd $_
     ```
 
-3. Make sure you have pygmy stopped. Run `pygmy stop` to be sure.
+2. Make sure you don't have anything running on port 80 on the host machine (like a web server). If you previously used pygmy, stop it with `pygmy stop`.
 
 4. We already have a Lando file in this repository, so we just need to run the following command to get Lando up:
 
