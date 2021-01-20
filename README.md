@@ -50,17 +50,43 @@ This repository is set up with a `.lando.yml` file, which allows you to use Land
 
 4. We already have a Lando file in this repository, so we just need to run the following command to get Lando up:
 
- ```bash
-lando start
-```
+    ```bash
+    lando start
+    ```
+  
+    If it's your first time, a relatively long process will start downloading and building the Lagoon images for use with lando.
+
+    When everything is done, you will see links to your site. Click the [http url](http://drupal9-example-simple.lndo.site) link to avoid the HTTPS errors.
+
+    ```
+     NGINX URLS    http://localhost:32772                         
+               http://drupal9-example-simple.lndo.site/       
+               https://drupal9-example-simple.lndo.site/      
+    ```
+    
+    *NOTE:* The site is not installed yet. You can use the web based install or use Drush, shown in the next step.
 
 5. Install your Drupal site with Drush:
 
-```bash
-lando drush si -y
-```
+    ```bash
+    lando drush si -y
+    ```
 
-6. And now we have a fully working local Drupal site on Lando! For more information on how to deploy your site, check out our documentation or our deployment demo.
+    You will see the install steps run, and the admin password will print out like:
+    
+    ```
+     [success] Installation complete.  User name: admin  User password: 6sNL4bvBKt
+    ```
+    
+    You can use that password to log in manually, or use drush to get a one time sign in link:
+    
+    ```
+    lando drush uli
+    ```
+
+6. Open your site: [drupal9-example-simple.lndo.site/](https://drupal9-example-simple.lndo.site/)
+
+And now we have a fully working local Drupal site on Lando! For more information on how to deploy your site, check out our documentation or our deployment demo.
 
 ## What does the template do?
 
