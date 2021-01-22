@@ -21,7 +21,7 @@ commands:
       - run: 
           name: Ensure all modules are installed and test install Drupal
           command: |
-            docker-compose exec cli composer install --ignore-platform-reqs
+            docker-compose exec cli composer install
             docker-compose exec cli drush si -y demo_umami --site-name="Lagoon CI Umami"
       # check that the site is installed
       - run: 
@@ -44,24 +44,6 @@ commands:
             sed -i -e "/###/d" docker-compose.yml
             docker-compose -p circleci down -v --remove-orphans
             docker image rm circleci_php circleci_nginx circleci || true
-  pull_tags:
-    description: "pull images from amazeeiolagoon dockerhub"
-    parameters:
-      branch:
-        type: string
-        default: "master"
-    steps:
-      - run:
-          name: Update docker images to master branch
-          command: |
-            docker pull --quiet amazeeiolagoon/php:7.4-fpm-<< parameters.branch >>
-            docker image tag amazeeiolagoon/php:7.4-fpm-<< parameters.branch >> amazeeio/php:7.4-fpm
-            docker pull --quiet amazeeiolagoon/php:7.4-cli-drupal-<< parameters.branch >>
-            docker image tag amazeeiolagoon/php:7.4-cli-drupal-<< parameters.branch >> amazeeio/php:7.4-cli-drupal
-            docker pull --quiet amazeeiolagoon/nginx-drupal:<< parameters.branch >>
-            docker image tag amazeeiolagoon/nginx-drupal:<< parameters.branch >> amazeeio/nginx-drupal
-            docker pull --quiet amazeeiolagoon/mariadb-drupal:<< parameters.branch >>
-            docker image tag amazeeiolagoon/mariadb-drupal:<< parameters.branch >> amazeeio/mariadb-drupal
 executors:
   php_docker:
     docker:
@@ -95,31 +77,55 @@ jobs:
       - checkout
       - setup_remote_docker
       - install_and_check
+      - remove_all
 
-  docker-compose-down:
-    executor: php_docker
+  leia-tests:
+    docker:
+      - image: circleci/php:cli-node
+        user: root
+        environment:
+          COMPOSER_ALLOW_SUPERUSER: 1
     steps:
       - checkout
       - setup_remote_docker
-      - remove_all
-
-  docker-compose-latest:
-    executor: php_docker
-    steps:
-      - checkout
-      - setup_remote_docker
-      - remove_all
-      - pull_tags:
-          branch: "master"
-      - install_and_check
       - run:
-          name: Retag latest images
+          name: Install Leia and dependencies
+          command: yarn add leia-parser mocha chai command-line-test
+      - run:
+          name: Generate test files
+          command: yarn leia TESTING_dockercompose.md test -r 2 -s 'Start up tests' -t 'Verification commands' -c 'Destroy tests'
+      - run:
+          name: Run tests
+          command: yarn mocha --timeout 900000 test/*.func.js
+
+  leia-tests-latest:
+    docker:
+      - image: circleci/php:cli-node
+        user: root
+        environment:
+          COMPOSER_ALLOW_SUPERUSER: 1
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: use testlagoon repo instead of uselagoon
           command: |
-            docker pull amazeeio/php:7.4-fpm
-            docker pull amazeeio/php:7.4-cli-drupal
-            docker pull amazeeio/nginx-drupal
-            docker pull amazeeio/mariadb-drupal
-      - remove_all
+            grep -rl uselagoon ./lagoon/*.dockerfile | xargs sed -i '/^FROM/ s/uselagoon/testlagoon/'
+            grep -rl uselagoon ./docker-compose.yml | xargs sed -i '/image:/ s/uselagoon/testlagoon/'
+      - run:
+          name: Install Leia and dependencies
+          command: yarn add leia-parser mocha chai command-line-test
+      - run:
+          name: Generate test files
+          command: yarn leia TESTING_dockercompose.md test -r 2 -s 'Start up tests' -t 'Verification commands' -c 'Destroy tests'
+      - run:
+          name: Run tests
+          command: yarn mocha --timeout 900000 test/*.func.js
+      - run:
+          name: revert to testlagoon repo instead of uselagoon
+          command: |
+            grep -rl testlagoon ./lagoon/*.dockerfile | xargs sed -i '/^FROM/ s/testlagoon/uselagoon/'
+            grep -rl testlagoon ./docker-compose.yml | xargs sed -i '/image:/ s/testlagoon/uselagoon/'
 
 workflows:
   version: 2
@@ -127,6 +133,7 @@ workflows:
     jobs:
       - composer
       - docker-compose
+      - leia-tests
   nightly:
     triggers:
       - schedule:
@@ -134,9 +141,10 @@ workflows:
           filters:
             branches:
               only:
-                - 9.x
+                - 9.x-advanced
+                - 8.x-advanced
     jobs:
       - composer
       - docker-compose
-      - docker-compose-latest
-      - docker-compose-down
+      - leia-tests
+      - leia-tests-latest
