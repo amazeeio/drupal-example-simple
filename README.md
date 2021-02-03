@@ -17,7 +17,7 @@ dependencies with [Composer](https://getcomposer.org/). It is based on the [orig
 1. Checkout this project repo and confirm the path is in Docker's file sharing config - https://docs.docker.com/docker-for-mac/#file-sharing
 
     ```bash
-    git clone https://github.com/amazeeio/drupal-simple-example.git drupal9-lagoon && cd $_
+    git clone https://github.com/amazeeio/drupal-example-simple.git drupal9-lagoon && cd $_
     ```
 
 2. Make sure you don't have anything running on port 80 on the host machine (like a web server) then run `pygmy up`
@@ -29,7 +29,7 @@ dependencies with [Composer](https://getcomposer.org/). It is based on the [orig
     docker-compose exec cli composer install
     ```
 
-4. Visit the new site @ `http://drupal-simple-example.docker.amazee.io`
+4. Visit the new site at [http://drupal-example-simple.docker.amazee.io](http://drupal-example-simple.docker.amazee.io).
 
 * If any steps fail, you're safe to rerun from any point.
 Starting again from the beginning will just reconfirm the changes.
@@ -43,24 +43,50 @@ This repository is set up with a `.lando.yml` file, which allows you to use Land
 2. Checkout the project repo and confirm the path is in Docker's file sharing config - https://docs.docker.com/docker-for-mac/#file-sharing
 
     ```bash
-    git clone https://github.com/amazeeio/drupal-simple-example.git drupal9-lagoon && cd $_
+    git clone https://github.com/amazeeio/drupal-example-simple.git drupal9-lagoon && cd $_
     ```
 
-3. Make sure you have pygmy stopped. Run `pygmy stop` to be sure.
+2. Make sure you don't have anything running on port 80 on the host machine (like a web server). If you previously used pygmy, stop it with `pygmy stop`.
 
 4. We already have a Lando file in this repository, so we just need to run the following command to get Lando up:
 
- ```bash
-lando start
-```
+    ```bash
+    lando start
+    ```
+  
+    If it's your first time, a relatively long process will start downloading and building the Lagoon images for use with lando.
+
+    When everything is done, you will see links to your site. Click the [http url](http://drupal9-example-simple.lndo.site) link to avoid the HTTPS errors.
+
+    ```
+     NGINX URLS    http://localhost:32772                         
+               http://drupal9-example-simple.lndo.site/       
+               https://drupal9-example-simple.lndo.site/      
+    ```
+    
+    *NOTE:* The site is not installed yet. You can use the web based install or use Drush, shown in the next step.
 
 5. Install your Drupal site with Drush:
 
-```bash
-lando drush si -y
-```
+    ```bash
+    lando drush si -y
+    ```
 
-6. And now we have a fully working local Drupal site on Lando! For more information on how to deploy your site, check out our documentation or our deployment demo.
+    You will see the install steps run, and the admin password will print out like:
+    
+    ```
+     [success] Installation complete.  User name: admin  User password: 6sNL4bvBKt
+    ```
+    
+    You can use that password to log in manually, or use drush to get a one time sign in link:
+    
+    ```
+    lando drush uli
+    ```
+
+6. Open your site: [drupal9-example-simple.lndo.site/](https://drupal9-example-simple.lndo.site/)
+
+And now we have a fully working local Drupal site on Lando! For more information on how to deploy your site, check out our documentation or our deployment demo.
 
 ## What does the template do?
 
