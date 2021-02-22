@@ -26,21 +26,49 @@ tasks:
 
 
 environments:
-  9.x:
+  cron-debug:
+    monitoring_urls:
+      - "www.haintzactuarial.com.au"
+      - "haintzactuarial.com.au"
     routes:
       - nginx:
-        - drupal9.amazee.io:
-            annotations:
-              nginx.ingress.kubernetes.io/server-snippet: |
-                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
-                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
-                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
-                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
-                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
-                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
-                add_header X-Drupal "#Drupal9 on Lagoon #CelebrateDrupal";
+          - "1haintzactuarial.com.au":
+              tls-acme: 'true'
+              insecure: Redirect
+              hsts: max-age=31536000
+          - "1www.haintzactuarial.com.au":
+              tls-acme: 'true'
+              insecure: Redirect
+              hsts: max-age=31536000
+          - "1www.prod.haintzactuarial.com.au":
+              tls-acme: 'true'
+              insecure: Redirect
+              hsts: max-age=31536000
+          - "1prod.haintzactuarial.com.au":
+              tls-acme: 'true'
+              insecure: Redirect
+              hsts: max-age=31536000
     cronjobs:
-      - name: drush cron
+      - name: cronjob
         schedule: "*/15 * * * *"
-        command: drush cron
+        command: cd web && wp cron event run --due-now
         service: cli
+      - name: clamav scan
+        schedule: "15 1 * * *"
+        command: |
+          freshclam; \
+          clamdscan --reload; \
+          clamdscan /app/web/content/uploads/; \
+          clamdscan /app/web/content/uploads/*/*; \
+          clamdscan /app/web/content/uploads/*
+        service: clamav
+  master:
+    routes:
+      - nginx:
+          - "www.uat.haintzactuarial.com.au":
+              tls-acme: 'true'
+              insecure: Redirect
+              hsts: max-age=31536000
+          - "uat.haintzactuarial.com.au":
+              tls-acme: 'true'
+              insecure: Redirect
