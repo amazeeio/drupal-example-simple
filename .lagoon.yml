@@ -28,9 +28,12 @@ tasks:
 environments:
   cron-debug:
     cronjobs:
-      - name: multiline cron command
+      - name: clamav scan
         schedule: "15 1 * * *"
         command: >
-          echo "multiline";
-          echo "cron command"
+          freshclam;
+          clamdscan --reload;
+          clamdscan /app/web/content/uploads/;
+          clamdscan /app/web/content/uploads/*/*;
+          clamdscan /app/web/content/uploads/*
         service: cli
