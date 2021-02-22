@@ -30,7 +30,7 @@ environments:
     cronjobs:
       - name: multiline cron command
         schedule: "15 1 * * *"
-        command: |-
-            echo "multiline" \
-            echo "cron command"
+        command: >
+          echo "multiline";
+          echo "cron command"
         service: cli
