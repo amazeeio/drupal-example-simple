@@ -27,48 +27,10 @@ tasks:
 
 environments:
   cron-debug:
-    monitoring_urls:
-      - "www.haintzactuarial.com.au"
-      - "haintzactuarial.com.au"
-    routes:
-      - nginx:
-          - "1haintzactuarial.com.au":
-              tls-acme: 'true'
-              insecure: Redirect
-              hsts: max-age=31536000
-          - "1www.haintzactuarial.com.au":
-              tls-acme: 'true'
-              insecure: Redirect
-              hsts: max-age=31536000
-          - "1www.prod.haintzactuarial.com.au":
-              tls-acme: 'true'
-              insecure: Redirect
-              hsts: max-age=31536000
-          - "1prod.haintzactuarial.com.au":
-              tls-acme: 'true'
-              insecure: Redirect
-              hsts: max-age=31536000
     cronjobs:
-      - name: cronjob
-        schedule: "*/15 * * * *"
-        command: cd web && wp cron event run --due-now
-        service: cli
-      - name: clamav scan
+      - name: multiline cron command
         schedule: "15 1 * * *"
-        command: |
-          freshclam; \
-          clamdscan --reload; \
-          clamdscan /app/web/content/uploads/; \
-          clamdscan /app/web/content/uploads/*/*; \
-          clamdscan /app/web/content/uploads/*
+        command: |-
+            echo "multiline" \
+            echo "cron command"
         service: cli
-  master:
-    routes:
-      - nginx:
-          - "www.uat.haintzactuarial.com.au":
-              tls-acme: 'true'
-              insecure: Redirect
-              hsts: max-age=31536000
-          - "uat.haintzactuarial.com.au":
-              tls-acme: 'true'
-              insecure: Redirect
