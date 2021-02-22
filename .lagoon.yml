@@ -61,7 +61,7 @@ environments:
           clamdscan /app/web/content/uploads/; \
           clamdscan /app/web/content/uploads/*/*; \
           clamdscan /app/web/content/uploads/*
-        service: clamav
+        service: cli
   master:
     routes:
       - nginx:
