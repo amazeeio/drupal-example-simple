@@ -7,3 +7,5 @@ COPY --from=cli /app /app
 
 # Define where the Drupal Root is located
 ENV WEBROOT=web
+
+COPY docker-entrypoint /lagoon/entrypoints/70-nginx-entrypoint
