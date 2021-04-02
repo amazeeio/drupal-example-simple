@@ -36,6 +36,7 @@ environments:
         service: cli
 
 backup-retention:
-  monthly: 0
-  weekly: 1
-  daily: 5
+  production:
+    monthly: 0
+    weekly: 1
+    daily: 5
