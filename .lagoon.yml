@@ -27,10 +27,15 @@ tasks:
 
 
 environments:
-  9.x:
+  cdchris12-test:
     # routes:
     cronjobs:
       - name: drush cron
         schedule: "*/15 * * * *"
         command: drush cron
         service: cli
+
+backup-retention:
+  monthly: 0
+  weekly: 1
+  daily: 5
