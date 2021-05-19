@@ -29,7 +29,7 @@ dependencies with [Composer](https://getcomposer.org/). It is based on the [orig
     docker-compose exec cli composer install
     ```
 
-4. Visit the new site @ `http://drupal-example-simple.docker.amazee.io`
+4. Visit the new site @ `http://drupal9-example-postgres.docker.amazee.io`
 
 * If any steps fail, you're safe to rerun from any point.
 Starting again from the beginning will just reconfirm the changes.
