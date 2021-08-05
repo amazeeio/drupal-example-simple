@@ -19,6 +19,7 @@ commands:
             sleep 10
             docker-compose ps -a
             docker network ls
+            docker-compose logs
       # ensure DB is up prior to install
       - run:
           name: Check mariadb (or postgres) is responsive with dockerize
