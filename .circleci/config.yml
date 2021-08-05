@@ -13,6 +13,7 @@ commands:
             sed -i -e "/###/d" docker-compose.yml
       - run: docker network prune -f && docker network inspect amazeeio-network >/dev/null || docker network create amazeeio-network
       - run: docker-compose up -d
+      - run: docker info
       - run: 
           name: Check all services are up
           command: |
@@ -56,7 +57,7 @@ commands:
 executors:
   php_docker:
     docker:
-      - image: circleci/php:cli
+      - image: circleci/php:7.4-cli
         user: root
         environment:
           COMPOSER_ALLOW_SUPERUSER: 1
@@ -84,19 +85,21 @@ jobs:
     executor: php_docker
     steps:
       - checkout
-      - setup_remote_docker
+      - setup_remote_docker:
+          version: 20.10.6
       - install_and_check
       - remove_all
 
   leia-tests:
     docker:
-      - image: circleci/php:cli-node
+      - image: circleci/php:7.4-cli-node
         user: root
         environment:
           COMPOSER_ALLOW_SUPERUSER: 1
     steps:
       - checkout
-      - setup_remote_docker
+      - setup_remote_docker:
+          version: 20.10.6
       - run:
           name: Install Leia and dependencies
           command: yarn add leia-parser mocha chai command-line-test
@@ -109,13 +112,14 @@ jobs:
 
   leia-tests-latest:
     docker:
-      - image: circleci/php:cli-node
+      - image: circleci/php:7.4-cli-node
         user: root
         environment:
           COMPOSER_ALLOW_SUPERUSER: 1
     steps:
       - checkout
-      - setup_remote_docker
+      - setup_remote_docker:
+          version: 20.10.6
       - run:
           name: use testlagoon repo instead of uselagoon
           command: |
