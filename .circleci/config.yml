@@ -13,15 +13,25 @@ commands:
             sed -i -e "/###/d" docker-compose.yml
       - run: docker network prune -f && docker network inspect amazeeio-network >/dev/null || docker network create amazeeio-network
       - run: docker-compose up -d
+      - run: docker info
+      - run: 
+          name: Check all services are up
+          command: |
+            sleep 10
+            docker-compose ps -a
+            docker network ls
+            docker-compose logs
       # ensure DB is up prior to install
       - run:
-          name: Check mariadb is responsive with dockerize
-          command: docker run --rm --net circleci_default jwilder/dockerize dockerize -wait tcp://mariadb:3306 -timeout 1m
+          name: Check mariadb (or postgres) is responsive with dockerize
+          command: |
+            docker run --rm --net circleci_default jwilder/dockerize dockerize -wait tcp://mariadb:3306 -timeout 30s || \
+            docker run --rm --net circleci_default jwilder/dockerize dockerize -wait tcp://postgres:5432 -timeout 30s
       # install Drupal demo_umami profile
       - run: 
           name: Ensure all modules are installed and test install Drupal
           command: |
-            docker-compose exec cli composer install --no-dev --ignore-platform-reqs
+            docker-compose exec cli composer install
             docker-compose exec cli drush si -y demo_umami --site-name="Lagoon CI Umami"
       # check that the site is installed
       - run: 
@@ -47,7 +57,7 @@ commands:
 executors:
   php_docker:
     docker:
-      - image: circleci/php:cli
+      - image: circleci/php:8.0-cli
         user: root
         environment:
           COMPOSER_ALLOW_SUPERUSER: 1
@@ -75,19 +85,21 @@ jobs:
     executor: php_docker
     steps:
       - checkout
-      - setup_remote_docker
+      - setup_remote_docker:
+          version: 20.10.6
       - install_and_check
       - remove_all
 
   leia-tests:
     docker:
-      - image: circleci/php:cli-node
+      - image: circleci/php:8.0-cli-node
         user: root
         environment:
           COMPOSER_ALLOW_SUPERUSER: 1
     steps:
       - checkout
-      - setup_remote_docker
+      - setup_remote_docker:
+          version: 20.10.6
       - run:
           name: Install Leia and dependencies
           command: yarn add leia-parser mocha chai command-line-test
@@ -100,13 +112,14 @@ jobs:
 
   leia-tests-latest:
     docker:
-      - image: circleci/php:cli-node
+      - image: circleci/php:8.0-cli-node
         user: root
         environment:
           COMPOSER_ALLOW_SUPERUSER: 1
     steps:
       - checkout
-      - setup_remote_docker
+      - setup_remote_docker:
+          version: 20.10.6
       - run:
           name: use testlagoon repo instead of uselagoon
           command: |
