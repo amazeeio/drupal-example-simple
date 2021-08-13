@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6cc876d0b2bf4d2859898faf4fbf7db3",
+    "content-hash": "975f852581bf05042b86af5f5512a71f",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -2967,16 +2967,16 @@
         },
         {
             "name": "drush/drush",
-            "version": "10.5.1",
+            "version": "10.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drush-ops/drush.git",
-                "reference": "a57390579f178d553decd3e9f92cdb37cbd27a07"
+                "reference": "c86d327359baddb0a2f51bb458703826469a0445"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drush-ops/drush/zipball/a57390579f178d553decd3e9f92cdb37cbd27a07",
-                "reference": "a57390579f178d553decd3e9f92cdb37cbd27a07",
+                "url": "https://api.github.com/repos/drush-ops/drush/zipball/c86d327359baddb0a2f51bb458703826469a0445",
+                "reference": "c86d327359baddb0a2f51bb458703826469a0445",
                 "shasum": ""
             },
             "require": {
@@ -3100,7 +3100,7 @@
                 "irc": "irc://irc.freenode.org/drush",
                 "issues": "https://github.com/drush-ops/drush/issues",
                 "slack": "https://drupal.slack.com/messages/C62H9CWQM",
-                "source": "https://github.com/drush-ops/drush/tree/10.5.1"
+                "source": "https://github.com/drush-ops/drush/tree/10.6.0"
             },
             "funding": [
                 {
@@ -3108,7 +3108,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-08-13T02:55:27+00:00"
+            "time": "2021-08-13T10:40:40+00:00"
         },
         {
             "name": "easyrdf/easyrdf",
