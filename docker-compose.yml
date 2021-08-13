@@ -86,7 +86,7 @@ services:
       << : *default-environment # loads the defined environment variables from the top
 
   mariadb:
-    image: uselagoon/mariadb-drupal:latest
+    image: uselagoon/mariadb-10.5-drupal:latest
     labels:
       lagoon.type: mariadb
       lando.type: mariadb-drupal
@@ -118,7 +118,7 @@ services:
       << : *default-environment
 
   varnish:
-    image: uselagoon/varnish-drupal:latest
+    image: uselagoon/varnish-5-drupal:latest
     labels:
       lagoon.type: varnish
       lando.type: varnish-drupal
