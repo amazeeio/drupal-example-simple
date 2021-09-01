@@ -19,8 +19,8 @@
         "amazeeio/drupal_integrations": "0.3.6",
         "composer/installers": "2.0.0",
         "cweagans/composer-patches": "1.7.1",
-        "drupal/core-project-message": "9.2.4",
-        "drupal/core-recommended": "9.2.4",
+        "drupal/core-project-message": "9.2.5",
+        "drupal/core-recommended": "9.2.5",
         "drupal/lagoon_logs": "1.1.0",
         "drupal/redis": "1.5.0",
         "drupal/search_api": "1.20.0",
@@ -29,7 +29,7 @@
         "zaporylie/composer-drupal-optimizations": "1.2.0"
     },
     "require-dev": {
-        "drupal/core-dev-pinned": "9.2.4"
+        "drupal/core-dev-pinned": "9.2.5"
     },
     "conflict": {
         "drupal/drupal": "*"
