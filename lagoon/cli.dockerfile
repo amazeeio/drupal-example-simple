@@ -4,7 +4,7 @@
 
 # We begin by specifying that we want to use a node image to perform some tasks
 # We give it a name, so we can reference it later - here we call it "builder"
-FROM uselagoon/node-10-builder as builder
+FROM uselagoon/node-16-builder as builder
 COPY . /app
 RUN yarn install
 RUN yarn gulp sprite
