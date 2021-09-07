@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp.spritesmith": "^6.12.1"
+  }
+}

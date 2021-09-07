@@ -19,3 +19,6 @@ web/sites/simpletest
 /.idea/
 /.editorconfig
 /.gitattributes
+
+/node_modules
+/sprites/dest/*
