@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4c0505554b6e35ea9f8127ef8b3b5206",
+    "content-hash": "fc9b567aef986ed8fff4211dccd4a616",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -1735,16 +1735,16 @@
         },
         {
             "name": "drupal/core",
-            "version": "8.9.18",
+            "version": "8.9.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core.git",
-                "reference": "e536176c45d9d75ec57f7a12c0e3c0aead856841"
+                "reference": "96eb83b31d950f020cbc079ab960159c3735a033"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core/zipball/e536176c45d9d75ec57f7a12c0e3c0aead856841",
-                "reference": "e536176c45d9d75ec57f7a12c0e3c0aead856841",
+                "url": "https://api.github.com/repos/drupal/core/zipball/96eb83b31d950f020cbc079ab960159c3735a033",
+                "reference": "96eb83b31d950f020cbc079ab960159c3735a033",
                 "shasum": ""
             },
             "require": {
@@ -1963,13 +1963,13 @@
             ],
             "description": "Drupal is an open source content management platform powering millions of websites and applications.",
             "support": {
-                "source": "https://github.com/drupal/core/tree/8.9.18"
+                "source": "https://github.com/drupal/core/tree/8.9.19"
             },
-            "time": "2021-08-12T17:48:42+00:00"
+            "time": "2021-09-14T22:08:18+00:00"
         },
         {
             "name": "drupal/core-composer-scaffold",
-            "version": "8.9.18",
+            "version": "8.9.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-composer-scaffold.git",
@@ -2013,13 +2013,13 @@
                 "drupal"
             ],
             "support": {
-                "source": "https://github.com/drupal/core-composer-scaffold/tree/8.9.5"
+                "source": "https://github.com/drupal/core-composer-scaffold/tree/8.9.4"
             },
             "time": "2020-08-07T22:30:30+00:00"
         },
         {
             "name": "drupal/core-project-message",
-            "version": "8.9.18",
+            "version": "8.9.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-project-message.git",
@@ -2054,22 +2054,22 @@
                 "drupal"
             ],
             "support": {
-                "source": "https://github.com/drupal/core-project-message/tree/8.9.18"
+                "source": "https://github.com/drupal/core-project-message/tree/8.9.4"
             },
             "time": "2020-08-02T22:04:49+00:00"
         },
         {
             "name": "drupal/core-recommended",
-            "version": "8.9.18",
+            "version": "8.9.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-recommended.git",
-                "reference": "71839bb9799b70f449b76294b461877ba1e9ff2c"
+                "reference": "880335bafeeba6d29454053bd24f253a219c2cfc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core-recommended/zipball/71839bb9799b70f449b76294b461877ba1e9ff2c",
-                "reference": "71839bb9799b70f449b76294b461877ba1e9ff2c",
+                "url": "https://api.github.com/repos/drupal/core-recommended/zipball/880335bafeeba6d29454053bd24f253a219c2cfc",
+                "reference": "880335bafeeba6d29454053bd24f253a219c2cfc",
                 "shasum": ""
             },
             "require": {
@@ -2081,7 +2081,7 @@
                 "doctrine/common": "v2.7.3",
                 "doctrine/inflector": "v1.2.0",
                 "doctrine/lexer": "1.0.2",
-                "drupal/core": "8.9.18",
+                "drupal/core": "8.9.19",
                 "easyrdf/easyrdf": "0.9.1",
                 "egulias/email-validator": "2.1.17",
                 "guzzlehttp/guzzle": "6.5.4",
@@ -2139,9 +2139,9 @@
             ],
             "description": "Locked core dependencies; require this project INSTEAD OF drupal/core.",
             "support": {
-                "source": "https://github.com/drupal/core-recommended/tree/8.9.18"
+                "source": "https://github.com/drupal/core-recommended/tree/8.9.19"
             },
-            "time": "2021-08-12T17:48:42+00:00"
+            "time": "2021-09-14T22:08:18+00:00"
         },
         {
             "name": "drupal/lagoon_logs",
@@ -6044,16 +6044,16 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v4.4.27",
+            "version": "v4.4.30",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "391d6d0e7a06ab54eb7c38fab29b8d174471b3ba"
+                "reference": "7f65c44c2ce80d3a0fcdb6385ee0ad535e45660c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/391d6d0e7a06ab54eb7c38fab29b8d174471b3ba",
-                "reference": "391d6d0e7a06ab54eb7c38fab29b8d174471b3ba",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/7f65c44c2ce80d3a0fcdb6385ee0ad535e45660c",
+                "reference": "7f65c44c2ce80d3a0fcdb6385ee0ad535e45660c",
                 "shasum": ""
             },
             "require": {
@@ -6113,7 +6113,7 @@
                 "dump"
             ],
             "support": {
-                "source": "https://github.com/symfony/var-dumper/tree/v4.4.27"
+                "source": "https://github.com/symfony/var-dumper/tree/v4.4.30"
             },
             "funding": [
                 {
@@ -6129,7 +6129,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-07-23T15:41:52+00:00"
+            "time": "2021-08-04T20:31:23+00:00"
         },
         {
             "name": "symfony/yaml",
@@ -7166,16 +7166,16 @@
         },
         {
             "name": "drupal/core-dev-pinned",
-            "version": "8.9.18",
+            "version": "8.9.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-dev-pinned.git",
-                "reference": "65be98a1fa18ce3fa22e343a9daf2430a67400d0"
+                "reference": "4d2f2aaac3dbac51a03a4a1a622538e23d8663c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core-dev-pinned/zipball/65be98a1fa18ce3fa22e343a9daf2430a67400d0",
-                "reference": "65be98a1fa18ce3fa22e343a9daf2430a67400d0",
+                "url": "https://api.github.com/repos/drupal/core-dev-pinned/zipball/4d2f2aaac3dbac51a03a4a1a622538e23d8663c7",
+                "reference": "4d2f2aaac3dbac51a03a4a1a622538e23d8663c7",
                 "shasum": ""
             },
             "require": {
@@ -7189,7 +7189,7 @@
                 "composer/xdebug-handler": "1.4.1",
                 "doctrine/instantiator": "1.0.5",
                 "drupal/coder": "8.3.9",
-                "drupal/core": "8.9.18",
+                "drupal/core": "8.9.19",
                 "fabpot/goutte": "v3.2.3",
                 "instaclick/php-webdriver": "1.4.7",
                 "jcalderonzumba/gastonjs": "v1.0.2",
@@ -7244,9 +7244,9 @@
             ],
             "description": "Pinned require-dev dependencies from drupal/drupal; use in addition to drupal/core-recommended to run tests from drupal/core.",
             "support": {
-                "source": "https://github.com/drupal/core-dev-pinned/tree/8.9.18"
+                "source": "https://github.com/drupal/core-dev-pinned/tree/8.9.19"
             },
-            "time": "2021-08-12T17:48:42+00:00"
+            "time": "2021-09-14T22:08:18+00:00"
         },
         {
             "name": "fabpot/goutte",
@@ -8980,6 +8980,7 @@
                 "issues": "https://github.com/sebastianbergmann/resource-operations/issues",
                 "source": "https://github.com/sebastianbergmann/resource-operations/tree/master"
             },
+            "abandoned": true,
             "time": "2015-07-28T20:34:47+00:00"
         },
         {
