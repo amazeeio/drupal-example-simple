@@ -72,6 +72,12 @@ docker-compose exec -T cli bash -c "yarn --version"
 # Should have a running Drupal 8 site served by nginx on port 8080
 docker-compose exec -T cli bash -c "curl -kL http://nginx:8080" | grep "Welcome to Drush Site-Install"
 
+# Should have a running Drupal 8 site served by varnish on port 8080
+docker-compose exec -T cli bash -c "curl -kL http://varnish:8080" | grep "Welcome to Drush Site-Install"
+
+# Should be running Varnish v5
+docker-compose exec -T cli bash -c "curl -I http://varnish:8080" | grep "Varnish/5"
+
 # Should be running Redis v5.0
 docker-compose exec -T redis sh -c "redis-server --version" | grep v=5.
 

@@ -76,6 +76,12 @@ lando lagoon --version | grep lagoon
 # Should have a running Drupal 8 site served by nginx on port 8080
 lando ssh -s cli -c "curl -kL http://nginx:8080" | grep "Welcome to Drush Site-Install"
 
+# Should have a running Drupal 8 site served by varnish on port 8080
+lando ssh -s cli -c "curl -kL http://varnish:8080" | grep "Welcome to Drush Site-Install"
+
+# Should be running Varnish v5
+lando ssh -s cli -c "curl -I http://varnish:8080" | grep "Varnish/5"
+
 # Should be running Redis v5.0
 lando ssh -s redis -c "redis-server --version | grep v=5."
 
