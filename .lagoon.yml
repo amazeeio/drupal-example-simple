@@ -2,6 +2,9 @@ docker-compose-yaml: docker-compose.yml
 
 project: drupal9-example-simple
 
+ssh: ssh.main.lagoon-core.test6.amazee.io:22
+api: api.main.lagoon-core.test6.amazee.io/graphql
+
 tasks:
 #   pre-rollout:
 #     - run:
