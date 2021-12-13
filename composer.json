@@ -16,7 +16,7 @@
         },
         {
             "type": "vcs",
-            "url": "git@git.drupal.org:issue/lagoon_logs-3184665.git"
+            "url": "https://git.drupalcode.org/issue/lagoon_logs-3184665.git"
         }
     ],
     "require": {

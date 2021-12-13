@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "15968b8caaa794d4ec287289542fda1b",
+    "content-hash": "7a9911e5f68387e86ef3c852245c507b",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -1678,7 +1678,7 @@
             "version": "dev-3184665-support-monolog-2.x",
             "source": {
                 "type": "git",
-                "url": "git@git.drupal.org:issue/lagoon_logs-3184665.git",
+                "url": "https://git.drupalcode.org/issue/lagoon_logs-3184665.git",
                 "reference": "d7a5bbfdb0ff214223b1db2aa7b53a05c5191885"
             },
             "require": {
