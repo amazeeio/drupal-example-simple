@@ -1679,7 +1679,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/issue/lagoon_logs-3184665.git",
-                "reference": "98b68934dcf27cdfcd2b9c2275076be8fd36ca1b"
+                "reference": "4301efc60662f1b0e1f8e6a63a0c99ffb6f7ca90"
             },
             "require": {
                 "monolog/monolog": "^1.24.0 || ^2.0"
@@ -1696,7 +1696,7 @@
                 }
             ],
             "description": "Lagoon_logs D8 is a convenience wrapper for monolog.",
-            "time": "2021-12-14T17:56:45+00:00"
+            "time": "2021-12-14T23:02:11+00:00"
         },
         {
             "name": "drush/drush",
