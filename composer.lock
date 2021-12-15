@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c87b314d0302d2d3e48f7388306f784f",
+    "content-hash": "2159262ca3be383019cfd4b15d7e331a",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -1947,17 +1947,17 @@
         },
         {
             "name": "drupal/search_api_solr",
-            "version": "4.2.2",
+            "version": "4.2.3",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/search_api_solr.git",
-                "reference": "4.2.2"
+                "reference": "4.2.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/search_api_solr-4.2.2.zip",
-                "reference": "4.2.2",
-                "shasum": "0faf61dbf98ca45dcaeb1b239c0032d763f10ab5"
+                "url": "https://ftp.drupal.org/files/projects/search_api_solr-4.2.3.zip",
+                "reference": "4.2.3",
+                "shasum": "afcfe144fd7d5ac2f8759d4b910be00dbb7974f8"
             },
             "require": {
                 "composer/semver": "^1.0|^3.0",
@@ -1996,8 +1996,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "4.2.2",
-                    "datestamp": "1636468035",
+                    "version": "4.2.3",
+                    "datestamp": "1639049388",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
