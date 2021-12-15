@@ -25,7 +25,7 @@
         "cweagans/composer-patches": "1.7.1",
         "drupal/core-project-message": "9.2.10",
         "drupal/core-recommended": "9.2.10",
-        "drupal/lagoon_logs": "3184665-support-monolog-2.x-dev",
+        "drupal/lagoon_logs": "^2",
         "drush/drush": "10.6.1",
         "monolog/monolog": "^2.0",
         "zaporylie/composer-drupal-optimizations": "1.2.0"
