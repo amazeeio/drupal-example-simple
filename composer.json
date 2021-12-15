@@ -25,7 +25,7 @@
         "drupal/redis": "1.5.0",
         "drupal/search_api": "1.21.0",
         "drupal/search_api_solr": "4.2.2",
-        "drush/drush": "10.6.1",
+        "drush/drush": "10.6.2",
         "zaporylie/composer-drupal-optimizations": "1.2.0"
     },
     "require-dev": {
