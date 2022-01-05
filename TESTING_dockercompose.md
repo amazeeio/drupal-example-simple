@@ -1,5 +1,5 @@
-Docker Compose Drupal 9 advanced - php7.4, nginx, mariadb, solr, redis
-======================================================================
+Docker Compose Drupal 9 Solr and Redis option - php7.4, nginx, mariadb, solr, redis
+===================================================================================
 
 This is a docker-compose version of the Lando example tests:
 

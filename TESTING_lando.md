@@ -1,5 +1,5 @@
-Lando Drupal 9 advanced - php7.4, nginx, mariadb, solr, redis
-=============================================================
+Lando Drupal 9 Solr and Redis option  - php7.4, nginx, mariadb, solr, redis
+===========================================================================
 
 This example exists primarily to test the following documentation:
 
