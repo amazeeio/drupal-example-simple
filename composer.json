@@ -22,7 +22,7 @@
         "drupal/core-composer-scaffold": "8.9.20",
         "drupal/core-project-message": "8.9.20",
         "drupal/core-recommended": "8.9.20",
-        "drupal/lagoon_logs": "1.1.0",
+        "drupal/lagoon_logs": "2.0.0",
         "drupal/lagoon_varnish": "1.1.0",
         "drupal/redis": "1.5.0",
         "drupal/search_api": "1.21.0",
