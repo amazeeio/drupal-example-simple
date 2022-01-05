@@ -21,7 +21,7 @@
         "cweagans/composer-patches": "1.7.1",
         "drupal/core-project-message": "9.3.2",
         "drupal/core-recommended": "9.3.2",
-        "drupal/lagoon_logs": "1.1.0",
+        "drupal/lagoon_logs": "2.0.0",
         "drupal/redis": "1.5.0",
         "drupal/search_api": "1.21.0",
         "drupal/search_api_solr": "4.2.4",
