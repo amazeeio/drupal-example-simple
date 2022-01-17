@@ -23,7 +23,7 @@
         "drupal/core-recommended": "9.3.2",
         "drupal/lagoon_logs": "2.0.0",
         "drupal/redis": "1.5.0",
-        "drupal/search_api": "1.21.0",
+        "drupal/search_api": "1.22.0",
         "drupal/search_api_solr": "4.2.4",
         "drush/drush": "11.0.1",
         "zaporylie/composer-drupal-optimizations": "1.2.0"
