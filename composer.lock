@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e445d2b9e23afef67259643dbf2c401c",
+    "content-hash": "c26f84bc0df4c6c3623b87bf33cc8c37",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -2060,16 +2060,16 @@
         },
         {
             "name": "drush/drush",
-            "version": "11.0.2",
+            "version": "11.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drush-ops/drush.git",
-                "reference": "3c93b6393d6a463cb1df314dae3db27fbb640cd4"
+                "reference": "94707767c12dd2282556089f08b599512f4d1050"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drush-ops/drush/zipball/3c93b6393d6a463cb1df314dae3db27fbb640cd4",
-                "reference": "3c93b6393d6a463cb1df314dae3db27fbb640cd4",
+                "url": "https://api.github.com/repos/drush-ops/drush/zipball/94707767c12dd2282556089f08b599512f4d1050",
+                "reference": "94707767c12dd2282556089f08b599512f4d1050",
                 "shasum": ""
             },
             "require": {
@@ -2106,7 +2106,7 @@
                 "cweagans/composer-patches": "~1.0",
                 "david-garcia/phpwhois": "4.3.0",
                 "drupal/core-recommended": "^9 || ^10",
-                "drupal/semver_example": "2.2.0",
+                "drupal/semver_example": "2.3.0",
                 "phpunit/phpunit": ">=7.5.20",
                 "rector/rector": "^0.12",
                 "squizlabs/php_codesniffer": "^3.6",
@@ -2195,7 +2195,7 @@
                 "irc": "irc://irc.freenode.org/drush",
                 "issues": "https://github.com/drush-ops/drush/issues",
                 "slack": "https://drupal.slack.com/messages/C62H9CWQM",
-                "source": "https://github.com/drush-ops/drush/tree/11.0.2"
+                "source": "https://github.com/drush-ops/drush/tree/11.0.4"
             },
             "funding": [
                 {
@@ -2203,7 +2203,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-01-19T13:42:06+00:00"
+            "time": "2022-01-25T14:02:58+00:00"
         },
         {
             "name": "egulias/email-validator",
