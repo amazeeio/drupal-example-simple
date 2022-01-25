@@ -23,7 +23,7 @@
         "drupal/core-project-message": "8.9.20",
         "drupal/core-recommended": "8.9.20",
         "drupal/lagoon_logs": "2.0.0",
-        "drush/drush": "10.6.2",
+        "drush/drush": "11.0.4",
         "zaporylie/composer-drupal-optimizations": "1.2.0"
     },
     "require-dev": {
