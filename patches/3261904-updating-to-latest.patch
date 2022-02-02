@@ -1,0 +1,70 @@
+diff --git a/config/install/lagoon_logs.settings.yml b/config/install/lagoon_logs.settings.yml
+index 8d298bbcd628b0ffa18311905ecd21f8bad5d24d..5eb4af8141800fd0ac9230697708f3c7fcb29e15 100644
+--- a/config/install/lagoon_logs.settings.yml
++++ b/config/install/lagoon_logs.settings.yml
+@@ -1,4 +1,4 @@
+ host: application-logs.lagoon.svc
+ port: 5140
+ identifier: drupal
+-enable: true
++disable: 0
+diff --git a/config/schema/lagoon_logs.schema.yml b/config/schema/lagoon_logs.schema.yml
+index 82d4fa6ef182c1317b0225947b64293ead815a99..fcc0e641f17e9f94bf5aeb4bf7b0e75c40e7d546 100644
+--- a/config/schema/lagoon_logs.schema.yml
++++ b/config/schema/lagoon_logs.schema.yml
+@@ -4,9 +4,9 @@ lagoon_logs.settings:
+   type: config_object
+   label: 'Lagoon logs settings'
+   mapping:
+-    enable:
++    disable:
+       type: integer
+-      label: 'Enabled'
++      label: 'Disabled'
+     host:
+       type: string
+       label: 'Logstash host'
+diff --git a/src/Form/LagoonLogsSettingsForm.php b/src/Form/LagoonLogsSettingsForm.php
+index 1e11155dffd03e5691d159a212c50db7459a1b37..ccb0dbb680943818982124d597c8ef8117205937 100644
+--- a/src/Form/LagoonLogsSettingsForm.php
++++ b/src/Form/LagoonLogsSettingsForm.php
+@@ -33,11 +33,11 @@ class LagoonLogsSettingsForm extends ConfigFormBase {
+   public function buildForm(array $form, FormStateInterface $form_state) {
+     $config = $this->config('lagoon_logs.settings');
+
+-    $form['enable'] = [
++    $form['disable'] = [
+       '#type' => 'checkbox',
+-      '#title' => $this->t('Enable module'),
+-      '#description' => $this->t('Send logs to Lagoon.'),
+-      '#default_value' => $config->get('enable'),
++      '#title' => $this->t('Disable module'),
++      '#description' => $this->t('Suppress sending logs to Lagoon.'),
++      '#default_value' => $config->get('disable'),
+     ];
+
+     $form['description'] = [
+@@ -62,7 +62,7 @@ class LagoonLogsSettingsForm extends ConfigFormBase {
+   public function submitForm(array &$form, FormStateInterface $form_state) {
+     parent::submitForm($form, $form_state);
+     $this->config('lagoon_logs.settings')
+-      ->set('enable', $form_state->getValue('enable'))
++      ->set('disable', $form_state->getValue('disable'))
+       ->save();
+   }
+
+diff --git a/src/Logger/LagoonLogsLoggerFactory.php b/src/Logger/LagoonLogsLoggerFactory.php
+index 11584a11272ae5237bd47fa864fc8692a61c60df..af3ab7371ba3a9034e473869178086c1d7825e2a 100644
+--- a/src/Logger/LagoonLogsLoggerFactory.php
++++ b/src/Logger/LagoonLogsLoggerFactory.php
+@@ -22,8 +22,8 @@ class LagoonLogsLoggerFactory {
+   }
+
+   public static function getHostProcessIndex(ConfigFactoryInterface $config) {
+-    $enabled = $config->get('lagoon_logs.settings')->get('enable');
+-    return $enabled ?
++    $disabled = $config->get('lagoon_logs.settings')->get('disable');
++    return $disabled != TRUE ?
+       implode('-', [
+         getenv('LAGOON_PROJECT') ?: self::LAGOON_LOGS_DEFAULT_LAGOON_PROJECT,
+         getenv('LAGOON_GIT_SAFE_BRANCH') ?: self::LAGOON_LOGS_DEFAULT_SAFE_BRANCH,

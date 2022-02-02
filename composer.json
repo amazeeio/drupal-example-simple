@@ -52,6 +52,11 @@
             "web/modules/custom/{$name}": ["type:drupal-custom-module"],
             "web/themes/custom/{$name}": ["type:drupal-custom-theme"]
         },
+        "patches": {
+            "drupal/lagoon_logs": {
+                "Disabled replacement for enable feature flag": "patches/3261904-updating-to-latest.patch"
+            }
+        },
         "drupal-scaffold": {
             "allowed-packages": [
                 "amazeeio/drupal_integrations"
