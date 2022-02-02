@@ -57,6 +57,7 @@
                 "Disabled replacement for enable feature flag": "patches/3261904-updating-to-latest.patch"
             }
         },
+        "enable-patching": true,
         "drupal-scaffold": {
             "allowed-packages": [
                 "amazeeio/drupal_integrations"

@@ -1,5 +1,274 @@
+From d2a5b4704e9f88f0fb563a545c1b22590f6eafef Mon Sep 17 00:00:00 2001
+From: fjgarlin <fjgarlin@2495842.no-reply.drupal.org>
+Date: Wed, 5 Jan 2022 02:44:30 +0000
+Subject: [PATCH 1/3] Resolve #3206815 "Local dns gets"
+
+---
+ config/install/lagoon_logs.settings.yml |  3 +-
+ config/schema/lagoon_logs.schema.yml    |  3 ++
+ lagoon_logs.info.yml                    |  2 +-
+ lagoon_logs.links.menu.yml              |  5 ++
+ lagoon_logs.routing.yml                 |  8 +--
+ src/Form/LagoonLogsSettingsForm.php     | 69 +++++++++++++++++++++++++
+ src/LagoonLogsInfoController.php        | 45 ----------------
+ src/Logger/LagoonLogsLogger.php         |  4 ++
+ src/Logger/LagoonLogsLoggerFactory.php  | 14 ++---
+ 9 files changed, 96 insertions(+), 57 deletions(-)
+ create mode 100644 lagoon_logs.links.menu.yml
+ create mode 100644 src/Form/LagoonLogsSettingsForm.php
+ delete mode 100644 src/LagoonLogsInfoController.php
+
 diff --git a/config/install/lagoon_logs.settings.yml b/config/install/lagoon_logs.settings.yml
-index 8d298bbcd628b0ffa18311905ecd21f8bad5d24d..5eb4af8141800fd0ac9230697708f3c7fcb29e15 100644
+index f8e6d1d..8d298bb 100644
+--- a/config/install/lagoon_logs.settings.yml
++++ b/config/install/lagoon_logs.settings.yml
+@@ -1,3 +1,4 @@
+ host: application-logs.lagoon.svc
+ port: 5140
+-identifier: drupal
+\ No newline at end of file
++identifier: drupal
++enable: true
+diff --git a/config/schema/lagoon_logs.schema.yml b/config/schema/lagoon_logs.schema.yml
+index 0e54f4b..82d4fa6 100644
+--- a/config/schema/lagoon_logs.schema.yml
++++ b/config/schema/lagoon_logs.schema.yml
+@@ -4,6 +4,9 @@ lagoon_logs.settings:
+   type: config_object
+   label: 'Lagoon logs settings'
+   mapping:
++    enable:
++      type: integer
++      label: 'Enabled'
+     host:
+       type: string
+       label: 'Logstash host'
+diff --git a/lagoon_logs.info.yml b/lagoon_logs.info.yml
+index be7ce4c..0e210b1 100644
+--- a/lagoon_logs.info.yml
++++ b/lagoon_logs.info.yml
+@@ -1,7 +1,7 @@
+ name: Lagoon Logs Module
+ description: Simple monolog wrapper for Lagoon.
+ package: Logging
+-
++configure: lagoon_logs.settings
+ type: module
+ core: 8.x
+ core_version_requirement: ^8 || ^9
+diff --git a/lagoon_logs.links.menu.yml b/lagoon_logs.links.menu.yml
+new file mode 100644
+index 0000000..bfdbbc1
+--- /dev/null
++++ b/lagoon_logs.links.menu.yml
+@@ -0,0 +1,5 @@
++system.lagoon_logs_settings:
++  title: 'Lagoon Logs settings'
++  parent: system.admin_config_development
++  description: 'Configure Lagoon Logs.'
++  route_name: lagoon_logs.settings
+diff --git a/lagoon_logs.routing.yml b/lagoon_logs.routing.yml
+index 4265216..37a86fc 100644
+--- a/lagoon_logs.routing.yml
++++ b/lagoon_logs.routing.yml
+@@ -1,7 +1,7 @@
+-lagoon_logs.module_info:
+-  path: 'admin/settings/lagoon_logs'
++lagoon_logs.settings:
++  path: '/admin/config/development/lagoon_logs'
+   defaults:
+-    _controller: '\Drupal\lagoon_logs\LagoonLogsInfoController::infoPage'
+-    _title: 'Lagoon Logs Settings'
++    _form: '\Drupal\lagoon_logs\Form\LagoonLogsSettingsForm'
++    _title: 'Lagoon Logs configuration'
+   requirements:
+     _permission: 'administer site configuration'
+diff --git a/src/Form/LagoonLogsSettingsForm.php b/src/Form/LagoonLogsSettingsForm.php
+new file mode 100644
+index 0000000..1e11155
+--- /dev/null
++++ b/src/Form/LagoonLogsSettingsForm.php
+@@ -0,0 +1,69 @@
++<?php
++
++namespace Drupal\lagoon_logs\Form;
++
++use Drupal\Core\Form\ConfigFormBase;
++use Drupal\Core\Form\FormStateInterface;
++use Symfony\Component\DependencyInjection\ContainerInterface;
++
++/**
++ * Settings form for lagoon_logs.
++ */
++class LagoonLogsSettingsForm extends ConfigFormBase {
++
++  /**
++   * {@inheritdoc}
++   */
++  protected function getEditableConfigNames() {
++    return [
++      'lagoon_logs.settings',
++    ];
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function getFormId() {
++    return 'lagoon_logs_settings_form';
++  }
++
++  /**
++   * Build the form.
++   */
++  public function buildForm(array $form, FormStateInterface $form_state) {
++    $config = $this->config('lagoon_logs.settings');
++
++    $form['enable'] = [
++      '#type' => 'checkbox',
++      '#title' => $this->t('Enable module'),
++      '#description' => $this->t('Send logs to Lagoon.'),
++      '#default_value' => $config->get('enable'),
++    ];
++
++    $form['description'] = [
++      '#prefix' => '<div class="ll-settings-description">',
++      '#suffix' => '</div>',
++      '#markup' => $this->t(
++        '<p>Current settings for the Lagoon Logs module. The defaults are set in configuration, this page is meant primarily for troubleshooting.</p>' .
++        '<ul>' .
++          '<li><b>' . $this->t('Logstash host') . ':</b> ' . $config->get('host') . '</li>' .
++          '<li><b>' . $this->t('Logstash port') . ':</b> ' . $config->get('port') . '</li>' .
++          '<li><b>' . $this->t('Logstash leading identifier') . ':</b> ' . $config->get('identifier') . '</li>' .
++        '</ul>'
++      ),
++    ];
++
++    return parent::buildForm($form, $form_state);
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function submitForm(array &$form, FormStateInterface $form_state) {
++    parent::submitForm($form, $form_state);
++    $this->config('lagoon_logs.settings')
++      ->set('enable', $form_state->getValue('enable'))
++      ->save();
++  }
++
++}
+diff --git a/src/LagoonLogsInfoController.php b/src/LagoonLogsInfoController.php
+deleted file mode 100644
+index f564359..0000000
+--- a/src/LagoonLogsInfoController.php
++++ /dev/null
+@@ -1,45 +0,0 @@
+-<?php
+-
+-namespace Drupal\lagoon_logs;
+-
+-use Drupal\Core\Config\ConfigFactoryInterface;
+-use Drupal\Core\Controller\ControllerBase;
+-use Drupal\lagoon_logs\Logger\LagoonLogsLoggerFactory;
+-
+-
+-class LagoonLogsInfoController extends ControllerBase {
+-
+-  public function infoPage() {
+-
+-    $config = \Drupal::config('lagoon_logs.settings');
+-
+-    $form = [];
+-
+-    $form['ll_settings_description'] = [
+-      '#prefix' => '<div class="ll-settings-description">',
+-      '#suffix' => '</div>',
+-      '#markup' => t('This page simply lists the current settings for the Lagoon Logs module. The defaults are set in configuration, this page is meant primarily for troubleshooting.'),
+-    ];
+-
+-    $form['ll_settings_logs_host'] = [
+-      '#prefix' => '<div class="ll-settings-key-value">',
+-      '#suffix' => '</div>',
+-      '#markup' => t('Logstash host: ') . $config->get('host')
+-    ];
+-
+-    $form['ll_settings_logs_port'] = [
+-      '#prefix' => '<div class="ll-settings-key-value">',
+-      '#suffix' => '</div>',
+-      '#markup' => t('Logstash port: ') . $config->get('port'),
+-    ];
+-
+-    $form['ll_settings_logs_identifier'] = [
+-      '#prefix' => '<div class="ll-settings-key-value">',
+-      '#suffix' => '</div>',
+-      '#markup' => t('Logstash leading identifier: ') . $config->get('identifier'),
+-    ];
+-
+-    return $form;
+-  }
+-
+-}
+\ No newline at end of file
+diff --git a/src/Logger/LagoonLogsLogger.php b/src/Logger/LagoonLogsLogger.php
+index ff4cfd5..07f4c94 100644
+--- a/src/Logger/LagoonLogsLogger.php
++++ b/src/Logger/LagoonLogsLogger.php
+@@ -112,6 +112,10 @@ class LagoonLogsLogger implements LoggerInterface {
+    * {@inheritdoc}
+    */
+   public function log($level, $message, array $context = []) {
++    if (!$this->logFullIdentifier) {
++      return;
++    }
++
+     global $base_url;
+
+     $logger = new Logger(
+diff --git a/src/Logger/LagoonLogsLoggerFactory.php b/src/Logger/LagoonLogsLoggerFactory.php
+index d4e8450..11584a1 100644
+--- a/src/Logger/LagoonLogsLoggerFactory.php
++++ b/src/Logger/LagoonLogsLoggerFactory.php
+@@ -18,14 +18,16 @@ class LagoonLogsLoggerFactory {
+   ) {
+     $host = $config->get('lagoon_logs.settings')->get('host');
+     $port = $config->get('lagoon_logs.settings')->get('port');
+-    return new LagoonLogsLogger($host, $port,
+-      self::getHostProcessIndex($config), $parser);
++    return new LagoonLogsLogger($host, $port, self::getHostProcessIndex($config), $parser);
+   }
+
+   public static function getHostProcessIndex(ConfigFactoryInterface $config) {
+-    return implode('-', [
+-      getenv('LAGOON_PROJECT') ?: self::LAGOON_LOGS_DEFAULT_LAGOON_PROJECT,
+-      getenv('LAGOON_GIT_SAFE_BRANCH') ?: self::LAGOON_LOGS_DEFAULT_SAFE_BRANCH,
+-    ]);
++    $enabled = $config->get('lagoon_logs.settings')->get('enable');
++    return $enabled ?
++      implode('-', [
++        getenv('LAGOON_PROJECT') ?: self::LAGOON_LOGS_DEFAULT_LAGOON_PROJECT,
++        getenv('LAGOON_GIT_SAFE_BRANCH') ?: self::LAGOON_LOGS_DEFAULT_SAFE_BRANCH,
++      ]) :
++      FALSE;
+   }
+ }
+--
+GitLab
+
+
+From b1e851184813b700afac73faf4c0493ee6cb2612 Mon Sep 17 00:00:00 2001
+From: Blaize Kaye <blaize.kaye@amazee.com>
+Date: Wed, 2 Feb 2022 18:31:32 +1300
+Subject: [PATCH 2/3] Switches enable logic to disable
+
+---
+ config/install/lagoon_logs.settings.yml |  2 +-
+ src/Form/LagoonLogsSettingsForm.php     | 10 +++++-----
+ src/Logger/LagoonLogsLoggerFactory.php  |  4 ++--
+ 3 files changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/config/install/lagoon_logs.settings.yml b/config/install/lagoon_logs.settings.yml
+index 8d298bb..5eb4af8 100644
 --- a/config/install/lagoon_logs.settings.yml
 +++ b/config/install/lagoon_logs.settings.yml
 @@ -1,4 +1,4 @@
@@ -8,24 +277,8 @@ index 8d298bbcd628b0ffa18311905ecd21f8bad5d24d..5eb4af8141800fd0ac9230697708f3c7
  identifier: drupal
 -enable: true
 +disable: 0
-diff --git a/config/schema/lagoon_logs.schema.yml b/config/schema/lagoon_logs.schema.yml
-index 82d4fa6ef182c1317b0225947b64293ead815a99..fcc0e641f17e9f94bf5aeb4bf7b0e75c40e7d546 100644
---- a/config/schema/lagoon_logs.schema.yml
-+++ b/config/schema/lagoon_logs.schema.yml
-@@ -4,9 +4,9 @@ lagoon_logs.settings:
-   type: config_object
-   label: 'Lagoon logs settings'
-   mapping:
--    enable:
-+    disable:
-       type: integer
--      label: 'Enabled'
-+      label: 'Disabled'
-     host:
-       type: string
-       label: 'Logstash host'
 diff --git a/src/Form/LagoonLogsSettingsForm.php b/src/Form/LagoonLogsSettingsForm.php
-index 1e11155dffd03e5691d159a212c50db7459a1b37..ccb0dbb680943818982124d597c8ef8117205937 100644
+index 1e11155..ccb0dbb 100644
 --- a/src/Form/LagoonLogsSettingsForm.php
 +++ b/src/Form/LagoonLogsSettingsForm.php
 @@ -33,11 +33,11 @@ class LagoonLogsSettingsForm extends ConfigFormBase {
@@ -54,7 +307,7 @@ index 1e11155dffd03e5691d159a212c50db7459a1b37..ccb0dbb680943818982124d597c8ef81
    }
 
 diff --git a/src/Logger/LagoonLogsLoggerFactory.php b/src/Logger/LagoonLogsLoggerFactory.php
-index 11584a11272ae5237bd47fa864fc8692a61c60df..af3ab7371ba3a9034e473869178086c1d7825e2a 100644
+index 11584a1..af3ab73 100644
 --- a/src/Logger/LagoonLogsLoggerFactory.php
 +++ b/src/Logger/LagoonLogsLoggerFactory.php
 @@ -22,8 +22,8 @@ class LagoonLogsLoggerFactory {
@@ -68,3 +321,34 @@ index 11584a11272ae5237bd47fa864fc8692a61c60df..af3ab7371ba3a9034e473869178086c1
        implode('-', [
          getenv('LAGOON_PROJECT') ?: self::LAGOON_LOGS_DEFAULT_LAGOON_PROJECT,
          getenv('LAGOON_GIT_SAFE_BRANCH') ?: self::LAGOON_LOGS_DEFAULT_SAFE_BRANCH,
+--
+GitLab
+
+
+From 42369da7060bed39683030f98f826baefc510b18 Mon Sep 17 00:00:00 2001
+From: fjgarlin <fjgarlin@2495842.no-reply.drupal.org>
+Date: Wed, 2 Feb 2022 08:23:30 +0000
+Subject: [PATCH 3/3] Update the property name
+
+---
+ config/schema/lagoon_logs.schema.yml | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/config/schema/lagoon_logs.schema.yml b/config/schema/lagoon_logs.schema.yml
+index 82d4fa6..fcc0e64 100644
+--- a/config/schema/lagoon_logs.schema.yml
++++ b/config/schema/lagoon_logs.schema.yml
+@@ -4,9 +4,9 @@ lagoon_logs.settings:
+   type: config_object
+   label: 'Lagoon logs settings'
+   mapping:
+-    enable:
++    disable:
+       type: integer
+-      label: 'Enabled'
++      label: 'Disabled'
+     host:
+       type: string
+       label: 'Logstash host'
+--
+GitLab
