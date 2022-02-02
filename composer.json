@@ -54,7 +54,7 @@
         },
         "patches": {
             "drupal/lagoon_logs": {
-                "Disabled replacement for enable feature flag": "patches/3261904-updating-to-latest.patch"
+                "Disabled replacement for enable feature flag": "https://git.drupalcode.org/project/lagoon_logs/-/merge_requests/9.diff"
             }
         },
         "enable-patching": true,
