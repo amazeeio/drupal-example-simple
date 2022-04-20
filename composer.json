@@ -16,17 +16,17 @@
         }
     ],
     "require": {
-        "amazeeio/drupal_integrations": "0.3.6",
-        "composer/installers": "2.0.1",
-        "cweagans/composer-patches": "1.7.1",
-        "drupal/core-project-message": "9.3.2",
-        "drupal/core-recommended": "9.3.2",
-        "drupal/lagoon_logs": "1.2.0",
-        "drush/drush": "11.0.1",
+        "amazeeio/drupal_integrations": "0.3.7",
+        "composer/installers": "2.1.1",
+        "cweagans/composer-patches": "1.7.2",
+        "drupal/core-project-message": "9.3.11",
+        "drupal/core-recommended": "9.3.11",
+        "drupal/lagoon_logs": "2.0.1",
+        "drush/drush": "11.0.9",
         "zaporylie/composer-drupal-optimizations": "1.2.0"
     },
     "require-dev": {
-        "drupal/core-dev-pinned": "9.3.2"
+        "drupal/core-dev-pinned": "9.3.11"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -34,7 +34,14 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config":{
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "drupal/core-composer-scaffold": true,
+            "composer/installers": true,
+            "cweagans/composer-patches": true,
+            "drupal/core-project-message": true,
+            "zaporylie/composer-drupal-optimizations": true
+        }
     },
     "extra": {
         "installer-paths": {
