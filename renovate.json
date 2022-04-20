@@ -1,13 +1,11 @@
 {
   "baseBranches": [
     "9.x",
-    "8.x",
-    "9.x-advanced",
-    "8.x-advanced",
-    "9.x-postgres",
-    "9.x-php8"
+    "test6"
   ],
   "extends": ["config:base"],
+  "automerge": true,
+  "automergeType": "pr",
   "dependencyDashboard": true,
   "prHourlyLimit": 0,
   "packageRules": [
