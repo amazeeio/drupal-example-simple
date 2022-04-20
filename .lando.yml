@@ -2,5 +2,7 @@ name: drupal9-example-simple
 recipe: lagoon
 config:
   flavor: drupal
-  build:
-    - composer install
+services:
+  cli:
+    build:
+      - composer install
