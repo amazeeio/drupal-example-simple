@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4278b451fe1486d8add8d6bd31a8a15c",
+    "content-hash": "d4c54f3a69a949eef67cb3c18c169700",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -180,16 +180,16 @@
         },
         {
             "name": "composer/installers",
-            "version": "v2.0.1",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "a241e78aaeb09781f5f5b92ac01ffd13ab43e5e8"
+                "reference": "af93ba6e52236418f07a278033eba6959ee5b983"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/a241e78aaeb09781f5f5b92ac01ffd13ab43e5e8",
-                "reference": "a241e78aaeb09781f5f5b92ac01ffd13ab43e5e8",
+                "url": "https://api.github.com/repos/composer/installers/zipball/af93ba6e52236418f07a278033eba6959ee5b983",
+                "reference": "af93ba6e52236418f07a278033eba6959ee5b983",
                 "shasum": ""
             },
             "require": {
@@ -209,7 +209,8 @@
                 "class": "Composer\\Installers\\Plugin",
                 "branch-alias": {
                     "dev-main": "2.x-dev"
-                }
+                },
+                "plugin-modifies-install-path": true
             },
             "autoload": {
                 "psr-4": {
@@ -303,7 +304,7 @@
             ],
             "support": {
                 "issues": "https://github.com/composer/installers/issues",
-                "source": "https://github.com/composer/installers/tree/v2.0.1"
+                "source": "https://github.com/composer/installers/tree/v2.1.1"
             },
             "funding": [
                 {
@@ -319,7 +320,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-09-13T08:21:20+00:00"
+            "time": "2022-04-13T09:13:00+00:00"
         },
         {
             "name": "composer/semver",
