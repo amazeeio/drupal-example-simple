@@ -46,8 +46,8 @@ lando ssh -c "env | grep LAGOON=" | grep cli-drupal
 lando ssh -c "env" | grep LAGOON_ROUTE | grep drupal9-example-simple.lndo.site
 lando ssh -c "env" | grep LAGOON_ENVIRONMENT_TYPE | grep development
 
-# Should be running PHP 7.4
-lando ssh -c "php -v" | grep "PHP 7.4"
+# Should be running PHP 8.1
+lando ssh -c "php -v" | grep "PHP 8.1"
 
 # Should have composer
 lando composer --version
