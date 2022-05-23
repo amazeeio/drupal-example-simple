@@ -5,6 +5,9 @@ project: drupal-example-simple
 ssh: ssh.main.lagoon-core.test6.amazee.io:22
 api: https://api.main.lagoon-core.test6.amazee.io/graphql
 
+environment_variables:
+  git_sha: 'true'
+
 tasks:
 #   pre-rollout:
 #     - run:
