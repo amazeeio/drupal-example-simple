@@ -67,7 +67,7 @@ docker-compose exec -T cli bash -c "node --version"
 docker-compose exec -T cli bash -c "yarn --version"
 
 # Should have a running Drupal 9 site served by nginx on port 8080
-docker-compose exec -T cli bash -c "curl -kL http://nginx:8080" | grep "Welcome to Drush Site-Install"
+docker-compose exec -T cli bash -c "curl -kL http://nginx:8080" | grep "Drush Site-Install"
 
 # Should be able to db-export and db-import the database
 docker-compose exec -T cli bash -c "drush sql-dump --result-file /app/test.sql"
