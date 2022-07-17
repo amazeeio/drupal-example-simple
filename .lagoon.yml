@@ -9,11 +9,11 @@ environment_variables:
   git_sha: 'true'
 
 tasks:
-  # pre-rollout:
-  #   - run:
-  #       name: Fake env
-  #       command: env
-  #       service: nonexistent
+  pre-rollout:
+    - run:
+        name: Working env
+        command: env
+        service: cli
 
   post-rollout:
     # Enable once config sync has been setup.
