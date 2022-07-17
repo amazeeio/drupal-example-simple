@@ -9,11 +9,11 @@ environment_variables:
   git_sha: 'true'
 
 tasks:
-  pre-rollout:
-    - run:
-        name: Fake env
-        command: env
-        service: nonexistent
+  # pre-rollout:
+  #   - run:
+  #       name: Fake env
+  #       command: env
+  #       service: nonexistent
 
   post-rollout:
     # Enable once config sync has been setup.
@@ -21,6 +21,10 @@ tasks:
     #     name: drush cim
     #     command: drush -y cim
     #     service: cli
+    - run:
+        name: Fake env
+        command: env
+        service: nonexistent
     - run:
         name: drush updb
         command: drush -y updb
