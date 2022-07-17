@@ -22,10 +22,6 @@ tasks:
     #     command: drush -y cim
     #     service: cli
     - run:
-        name: Fake env
-        command: env
-        service: nonexistent
-    - run:
         name: drush updb
         command: drush -y updb
         service: cli
