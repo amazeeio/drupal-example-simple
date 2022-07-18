@@ -29,6 +29,11 @@ tasks:
         name: drush cr
         command: drush -y cr
         service: cli
+    - run:
+        name: broken command
+        command: false
+        service: cli
+    
 
 
 
