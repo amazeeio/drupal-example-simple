@@ -93,7 +93,7 @@ tasks:
 
 
 environments:
-  9.x:
+  test6:
     # routes:
     cronjobs:
       - name: drush cron
