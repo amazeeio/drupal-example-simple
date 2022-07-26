@@ -97,6 +97,6 @@ environments:
     # routes:
     cronjobs:
       - name: drush cron
-        schedule: "*/15 * * * *"
+        schedule: "*/30 * * * *"
         command: drush cron --debug
         service: cli
