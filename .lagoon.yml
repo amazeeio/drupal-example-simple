@@ -92,7 +92,7 @@ tasks:
 
 backup-retention:
   production:
-    hourly: 168
+    hourly: 48
     daily: 185
 
 environments:
