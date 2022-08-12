@@ -29,13 +29,11 @@ tasks:
         name: drush cr
         command: drush -y cr
         service: cli
-    - run:
-        name: broken command
-        command: exit 1
-        service: cli
-    
 
-
+backup-retention:
+  production:
+    hourly: 168
+    daily: 185
 
 environments:
   9.x:
