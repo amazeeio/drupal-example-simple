@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "db04bc22560fdea73babe9874ca05a16",
+    "content-hash": "b48b1e5f7469811bd73e890924dcca75",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -2145,11 +2145,11 @@
         },
         {
             "name": "drupal/lagoon_logs",
-            "version": "dev-3276367-drupal10",
+            "version": "dev-3317112-re-add-drupal8-support",
             "source": {
                 "type": "git",
-                "url": "https://git.drupalcode.org/issue/lagoon_logs-3276367.git",
-                "reference": "ce9ad79af44603ca94dc7bc4277c3a2e84f00209"
+                "url": "https://git.drupalcode.org/issue/lagoon_logs-3317112.git",
+                "reference": "ec5eba941571834b5de973df07bb1594fa52c866"
             },
             "require": {
                 "monolog/monolog": "^2.3"
@@ -2166,7 +2166,7 @@
                 }
             ],
             "description": "Simple monolog wrapper for Lagoon",
-            "time": "2022-10-23T21:51:34+00:00"
+            "time": "2022-10-23T22:56:49+00:00"
         },
         {
             "name": "drush/drush",
