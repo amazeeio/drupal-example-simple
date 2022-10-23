@@ -1,6 +1,9 @@
 docker-compose-yaml: docker-compose.yml
 
-project: drupal8-example-simple
+project: drupal-example-simple
+
+ssh: ssh.main.lagoon-core.test6.amazee.io:22
+api: https://api.main.lagoon-core.test6.amazee.io/graphql
 
 tasks:
 #   pre-rollout:
@@ -21,26 +24,4 @@ tasks:
     - run:
         name: drush cr
         command: drush -y cr
-        service: cli
-
-
-
-environments:
-  9.x:
-    routes:
-      - nginx:
-        - drupal9.amazee.io:
-            annotations:
-              nginx.ingress.kubernetes.io/server-snippet: |
-                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
-                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
-                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
-                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
-                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
-                add_header X-BlackLivesMatter ⬛️⬛️⬛️⬛️⬛️⬛️;
-                add_header X-Drupal "#Drupal9 on Lagoon #CelebrateDrupal";
-    cronjobs:
-      - name: drush cron
-        schedule: "*/15 * * * *"
-        command: drush cron
         service: cli

@@ -11,6 +11,10 @@
     ],
     "repositories": [
         {
+            "type": "vcs",
+            "url": "https://git.drupalcode.org/issue/lagoon_logs-3276367.git"
+        },
+        {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         }
@@ -22,7 +26,7 @@
         "drupal/core-composer-scaffold": "8.9.20",
         "drupal/core-project-message": "8.9.20",
         "drupal/core-recommended": "8.9.20",
-        "drupal/lagoon_logs": "2.0.0",
+        "drupal/lagoon_logs": "3276367-drupal10-dev",
         "drush/drush": "10.6.2",
         "zaporylie/composer-drupal-optimizations": "1.2.0"
     },
@@ -53,7 +57,8 @@
                 "amazeeio/drupal_integrations"
             ],
             "file-mapping": {
-                "[web-root]/sites/default/all.settings.php": "assets/all.settings.php"
+                "[web-root]/sites/default/all.settings.php": "assets/all.settings.php",
+                "[project-root]/drush/sites/lagoon.site.yml": "assets/lagoon.site.yml"
             },
             "locations": {
                 "web-root": "web/"
