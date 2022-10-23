@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fd19b253cc1dfb5a3a562d588e32ee1a",
+    "content-hash": "c8b4e5b270f9c863ae1b7e95907bbe04",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -1706,16 +1706,16 @@
         },
         {
             "name": "drush/drush",
-            "version": "11.3.0",
+            "version": "11.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drush-ops/drush.git",
-                "reference": "b9c9c324e4db10ac223707b774ca3e491535aa56"
+                "reference": "77056760e59564a2edcc6c12eb483adc3cc302bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drush-ops/drush/zipball/b9c9c324e4db10ac223707b774ca3e491535aa56",
-                "reference": "b9c9c324e4db10ac223707b774ca3e491535aa56",
+                "url": "https://api.github.com/repos/drush-ops/drush/zipball/77056760e59564a2edcc6c12eb483adc3cc302bb",
+                "reference": "77056760e59564a2edcc6c12eb483adc3cc302bb",
                 "shasum": ""
             },
             "require": {
@@ -1839,7 +1839,7 @@
                 "forum": "http://drupal.stackexchange.com/questions/tagged/drush",
                 "issues": "https://github.com/drush-ops/drush/issues",
                 "slack": "https://drupal.slack.com/messages/C62H9CWQM",
-                "source": "https://github.com/drush-ops/drush/tree/11.3.0"
+                "source": "https://github.com/drush-ops/drush/tree/11.3.1"
             },
             "funding": [
                 {
@@ -1847,7 +1847,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-10-19T16:38:46+00:00"
+            "time": "2022-10-23T00:29:10+00:00"
         },
         {
             "name": "egulias/email-validator",
