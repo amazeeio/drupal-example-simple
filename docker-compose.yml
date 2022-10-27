@@ -32,6 +32,7 @@ services:
       context: .
       target: cli
       dockerfile: lagoon/Dockerfile
+    image: &cli-image ${COMPOSE_PROJECT_NAME:-drupal9-example-simple}-cli # this image will be reused as `CLI_IMAGE` in subsequent Docker builds
     labels:
       # Lagoon Labels
       lagoon.type: cli-persistent
@@ -66,8 +67,9 @@ services:
   php:
     build:
       context: .
-      target: php
-      dockerfile: lagoon/Dockerfile
+      dockerfile: lagoon/php.dockerfile
+      args:
+        CLI_IMAGE: *cli-image
     labels:
       lagoon.type: nginx-php-persistent
       lagoon.name: nginx # we want this service be part of the nginx pod in Lagoon
@@ -75,6 +77,8 @@ services:
       lando.type: php-fpm
     << : *default-volumes # loads the defined volumes from the top
     << : *default-user # uses the defined user from top
+    depends_on:
+      - cli # basically just tells docker-compose to build the cli first
     environment:
       << : *default-environment # loads the defined environment variables from the top
 
