@@ -16,7 +16,7 @@ tasks:
         service: cli
         scaleWaitTime: 1
         scaleMaxIterations: 1
-        RequiresEnvironment: true
+        RequiresEnvironment: false
 
   post-rollout:
     # Enable once config sync has been setup.
