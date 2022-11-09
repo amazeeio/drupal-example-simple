@@ -14,6 +14,9 @@ tasks:
         name: Working env
         command: env
         service: cli
+        scaleWaitTime: 1
+        ScaleMaxIterations: 1
+        RequiresEnvironment: true
 
   post-rollout:
     # Enable once config sync has been setup.
