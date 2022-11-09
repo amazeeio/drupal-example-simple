@@ -14,8 +14,6 @@ tasks:
         name: Working env
         command: env
         service: cli
-        scaleWaitTime: 1
-        scaleMaxIterations: 1
         RequiresEnvironment: false
 
   post-rollout:
