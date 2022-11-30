@@ -23,6 +23,10 @@ tasks:
     #     command: drush -y cim
     #     service: cli
     - run:
+        name: print env
+        command: env
+        service: cli
+    - run:
         name: drush updb
         command: drush -y updb
         service: cli
@@ -30,6 +34,7 @@ tasks:
         name: drush cr
         command: drush -y cr
         service: cli
+    
 
 backup-retention:
   production:
