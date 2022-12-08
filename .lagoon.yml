@@ -79,6 +79,12 @@ tasks:
         command: ls -al /tmp/test-*
         service: cli
         shell: bash
+     - 
+      run:
+        name: Show env in php
+        command: env
+        service: nginx
+        container: php
     -
       run:
         name: drush updb
