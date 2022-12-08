@@ -79,7 +79,7 @@ tasks:
         command: ls -al /tmp/test-*
         service: cli
         shell: bash
-     - 
+    - 
       run:
         name: Show env in php
         command: env
