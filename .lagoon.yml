@@ -1,8 +1,8 @@
 docker-compose-yaml: docker-compose.yml
 
-project: drupal-example-simple
+project: test6-drupal-example-simple
 
-ssh: ssh.main.lagoon-core.test6.amazee.io:22
+ssh: token.main.lagoon-core.test6.amazee.io:22
 api: https://api.main.lagoon-core.test6.amazee.io/graphql
 
 environment_variables:
@@ -109,3 +109,21 @@ environments:
         schedule: "*/30 * * * *"
         command: drush cron --debug
         service: cli
+
+lagoon-sync:
+  ssh:
+    host: ssh.main.lagoon-core.test6.amazee.io
+    port: 22
+  mariadb:
+    config:
+      hostname: "${MARIADB_HOST:-mariadb}"
+      username: "${MARIADB_USERNAME:-drupal}"
+      password: "${MARIADB_PASSWORD:-drupal}"
+      port: "${MARIADB_PORT:-3306}"
+      database: "${MARIADB_DATABASE:-drupal}"
+  files:
+    config:
+      sync-directory: "/app/web/sites/default/files"
+  drupalconfig:
+    config:
+      syncpath: "./config/sync"

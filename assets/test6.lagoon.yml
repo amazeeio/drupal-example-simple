@@ -1,0 +1,13 @@
+current: amazeeio-test6
+default: amazeeio-test6
+lagoons:
+  amazeeio-test6:
+    graphql: https://api.main.lagoon-core.test6.amazee.io/graphql
+    hostname: token.main.lagoon-core.test6.amazee.io
+    ui: https://ui.main.lagoon-core.test6.amazee.io
+    kibana: https://opensearch-dashboards.test6.amazee.io
+    port: "22"
+    version: v1.4.0
+    sshkey: ""
+updatecheckdisable: false
+environmentfromdirectory: true

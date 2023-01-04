@@ -62,7 +62,8 @@
             ],
             "file-mapping": {
                 "[web-root]/sites/default/all.settings.php": "assets/all.settings.php",
-                "[project-root]/drush/sites/lagoon.site.yml": "assets/lagoon.site.yml"
+                "[project-root]/drush/sites/lagoon.site.yml": "assets/lagoon.site.yml",
+                "/home/.lagoon.yml": "assets/test6.lagoon.yml"
             },
             "locations": {
                 "web-root": "web/"
