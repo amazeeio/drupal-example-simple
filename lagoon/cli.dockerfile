@@ -10,6 +10,5 @@ RUN composer install --no-dev
 COPY . /app
 RUN mkdir -p -v -m775 /app/web/sites/default/files
 
-COPY ./lagoon/test6.lagoon.yml /home/.lagoon.yml
 # Define where the Drupal Root is located
 ENV WEBROOT=web
