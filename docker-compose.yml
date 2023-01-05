@@ -6,6 +6,7 @@ x-volumes:
     volumes:
       - .:/app:delegated ### Local overrides to mount host filesystem. Automatically removed in CI and PROD.
       - files:/app/web/sites/default/files
+      - ${SSH_AUTH_SOCK:-/dev/null}:/ssh-agent ### Local overrides to mount ssh-agent. Automatically removed in CI and PROD.
 
 x-environment:
   &default-environment
@@ -15,6 +16,7 @@ x-environment:
     #LAGOON_ENVIRONMENT_TYPE: production
     # Uncomment to enable xdebug and then restart via `docker-compose up -d`
     #XDEBUG_ENABLE: "true"
+    SSH_AUTH_SOCK: /ssh-agent ### Local overrides to mount ssh-agent. Automatically removed in CI and PROD.
 
 x-user:
   &default-user
