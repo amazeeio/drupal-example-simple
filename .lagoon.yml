@@ -41,10 +41,10 @@ backup-retention:
     daily: 185
 
 environments:
-  test6:
+  test6-target:
     # routes:
     cronjobs:
       - name: drush cron
-        schedule: "*/30 * * * *"
-        command: drush cron --debug
+        schedule: "*/2 * * * *"
+        command: sleep 600
         service: cli

@@ -1,7 +1,7 @@
 #
 # CLI image
 #
-FROM uselagoon/php-8.1-cli-drupal:latest as cli
+FROM testlagoon/php-8.1-cli-drupal:pr-197 as cli
 
 COPY composer.* /app/
 COPY assets /app/assets
@@ -15,7 +15,7 @@ ENV WEBROOT=web
 #
 # Nginx image
 #
-FROM uselagoon/nginx-drupal:latest as nginx
+FROM testlagoon/nginx-drupal:pr-197 as nginx
 
 COPY --from=cli /app /app
 
@@ -25,6 +25,6 @@ ENV WEBROOT=web
 #
 # PHP-FPM image
 #
-FROM uselagoon/php-8.1-fpm:latest as php
+FROM testlagoon/php-8.1-fpm:pr-197 as php
 
 COPY --from=cli /app /app
