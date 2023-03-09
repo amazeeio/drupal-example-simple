@@ -1,0 +1,62 @@
+lagoon-sync:
+  mariadb:
+    config:
+      hostname: "$MARIADB_HOST"
+      username: "$MARIADB_USERNAME"
+      password: "$MARIADB_PASSWORD"
+      port: "$MARIADB_PORT"
+      database: "$MARIADB_DATABASE"
+      ignore-table:
+        - "table_to_ignore"
+      ignore-table-data:
+        - "cache_data"
+        - "cache_menu"
+    local:
+      config:
+        hostname: "mariadb"
+        username: "drupal"
+        password: "drupal"
+        port: "3306"
+        database: "drupal"
+  postgres:
+    config:
+      hostname: "$POSTGRES_HOST"
+      username: "$POSTGRES_USERNAME"
+      password: "$POSTGRES_PASSWORD"
+      port: "5432"
+      database: "$POSTGRES_DATABASE"
+      exclude-table:
+        - "table_to_ignore"
+      exclude-table-data:
+        - "cache_data"
+        - "cache_menu"
+    local:
+      config:
+        hostname: "postgres"
+        username: "drupal"
+        password: "drupal"
+        port: "3306"
+        database: "drupal"
+  mongodb:
+    config:
+      hostname: "$MONGODB_HOST"
+      port: "$MONGODB_SERVICE_PORT"
+      database: "MONGODB_DATABASE"
+    local:
+      config:
+        hostname: "$MONGODB_HOST"
+        port: "27017"
+        database: "local"
+  files:
+    config:
+      sync-directory: "/app/web/sites/default/files"
+    local:
+      config:
+        sync-directory: "/app/web/sites/default/files"
+  drupalconfig:
+    config:
+      syncpath: "./config/sync"
+    local:
+      overrides:
+        config:
+          syncpath: "./config/sync"

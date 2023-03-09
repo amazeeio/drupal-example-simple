@@ -1,5 +1,9 @@
 FROM uselagoon/php-8.1-cli-drupal:latest
 
+COPY lagoon/99-start-site-alias.sh /lagoon/entrypoints/
+COPY lagoon/site-alias-gen /lagoon/site-alias-gen
+COPY lagoon/drush.yml /home/.drush/drush.yml
+
 COPY composer.* /app/
 COPY assets /app/assets
 RUN composer install --no-dev

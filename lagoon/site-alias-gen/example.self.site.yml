@@ -1,0 +1,11 @@
+# File: self.site.yml
+live:
+  host: server.domain.com
+  user: www-admin
+  root: /other/path/to/live/drupal
+  uri: http://example.com
+stage:
+  host: server.domain.com
+  user: www-admin
+  root: /other/path/to/stage/drupal
+  uri: http://stage.example.com
