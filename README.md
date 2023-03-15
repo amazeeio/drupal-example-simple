@@ -1,6 +1,6 @@
 # Composer template for Drupal projects hosted on amazee.io
 
-This project template should provide a kickstart for managing your site
+This project template should provide a kickstart for managing your site 
 dependencies with [Composer](https://getcomposer.org/). It is based on the [original Drupal Composer Template](https://github.com/drupal-composer/drupal-project), but includes everything necessary to run on amazee.io (either the local development environment or on amazee.io servers.)
 
 ## Requirements
