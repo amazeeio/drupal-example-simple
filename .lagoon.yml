@@ -98,6 +98,12 @@ tasks:
     - 
       run:
         name: errors and output
+        command: echo "test1" && echo "test2" 1>&2 && echo "test3" && echo "test4" 1>&2
+        service: cli
+        shell: bash
+    - 
+      run:
+        name: errors and output
         command: echo "test1" && echo "test2" 1>&2 && echo "test3" && echo "test4" 1>&2 && exit 1
         service: cli
 
