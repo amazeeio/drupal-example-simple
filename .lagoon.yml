@@ -98,14 +98,9 @@ tasks:
     - 
       run:
         name: errors and output
-        command: echo "test1" && sleep 1 && echo "test2" 1>&2 && sleep 1 && echo "test3" 1>&2 && sleep 1 && echo "test4"
+        command: echo "test1 stdout" && sleep 1 && echo "test2 stderr" 1>&2 && sleep 1 && echo "test3 stderr" 1>&2 && sleep 1 && echo "test4 stdout"
         service: cli
         shell: bash
-    - 
-      run:
-        name: errors and output
-        command: echo "test1" && sleep 1 && echo "test2" 1>&2 && sleep 1 && echo "test3" 1>&2 && sleep 1 && echo "test4" && exit 1
-        service: cli
 
 backup-retention:
   production:
