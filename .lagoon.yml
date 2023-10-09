@@ -107,11 +107,13 @@ backup-retention:
     hourly: 48
     daily: 185
 
+routes:
+  autogenerate:
+    enabled: false
+
 environments:
   test6:
     routes:
-      - autogenerate:
-          enabled: false
       - nginx:
         - testroute.test6.amazee.io:
             tls-acme: 'true'
