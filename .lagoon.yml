@@ -119,7 +119,7 @@ environments:
             tls-acme: 'true'
             insecure: Allow
     cronjobs:
-      - name: drush cron
+      - name: drush crondemonium
         schedule: "*/30 * * * *"
         command: drush cron --debug
         service: cli
