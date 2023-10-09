@@ -108,8 +108,22 @@ backup-retention:
     daily: 185
 
 environments:
+
+  main:
+    routes:
+      - ui:
+        - dashboard.amazeeio.cloud:
+            tls-acme: 'true'
+            insecure: Allow
+
   test6:
-    # routes:
+    routes:
+      - autogenrate:
+        - enabled: false
+      - nginx:
+        - testroute.test6.amazee.io:
+            tls-acme: 'true'
+            insecure: Allow
     cronjobs:
       - name: drush cron
         schedule: "*/30 * * * *"
