@@ -115,11 +115,11 @@ environments:
         - dashboard.amazeeio.cloud:
             tls-acme: 'true'
             insecure: Allow
-
+routes:
+  autogenerate:
+    enabled: false
   test6:
     routes:
-      - autogenrate:
-        - enabled: false
       - nginx:
         - testroute.test6.amazee.io:
             tls-acme: 'true'
