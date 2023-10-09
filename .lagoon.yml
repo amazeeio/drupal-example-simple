@@ -108,18 +108,10 @@ backup-retention:
     daily: 185
 
 environments:
-
-  main:
-    routes:
-      - ui:
-        - dashboard.amazeeio.cloud:
-            tls-acme: 'true'
-            insecure: Allow
-routes:
-  autogenerate:
-    enabled: false
   test6:
     routes:
+      - autogenerate:
+          enabled: false
       - nginx:
         - testroute.test6.amazee.io:
             tls-acme: 'true'
