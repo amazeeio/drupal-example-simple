@@ -119,7 +119,10 @@ environments:
             tls-acme: 'true'
             insecure: Allow
         - testroute.amazeeio-test.com:
-            tls-acme: 'true'
+            tls-acme: 'false'
+            insecure: Allow
+        - testroute.example.com:
+            tls-acme: 'false'
             insecure: Allow
     cronjobs:
       - name: drush crondemonium
