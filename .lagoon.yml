@@ -118,7 +118,7 @@ environments:
         - testroute.test6.amazee.io:
             tls-acme: 'true'
             insecure: Allow
-        - testroute.example.com:
+        - testroute.amazeeio-test.com:
             tls-acme: 'true'
             insecure: Allow
     cronjobs:
