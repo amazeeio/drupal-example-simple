@@ -107,21 +107,15 @@ backup-retention:
     hourly: 48
     daily: 185
 
-routes:
-  autogenerate:
-    enabled: false
+# routes:
+#   autogenerate:
+#     enabled: false
 
 environments:
   test6:
     routes:
       - nginx:
         - testroute.test6.amazee.io:
-            tls-acme: 'true'
-            insecure: Allow
-        - testroute.amazeeio-test.com:
-            tls-acme: 'false'
-            insecure: Allow
-        - testroute.example.com:
             tls-acme: 'false'
             insecure: Allow
     cronjobs:
