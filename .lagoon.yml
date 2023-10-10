@@ -105,12 +105,12 @@ tasks:
 backup-retention:
   production:
     hourly: 48
-    daily: 185
+    daily: 15
 
 environments:
   test6:
     cronjobs:
-      - name: drush crondemonium
+      - name: drush cron
         schedule: "*/30 * * * *"
         command: drush cron --debug
         service: cli
