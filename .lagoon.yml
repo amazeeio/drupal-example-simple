@@ -107,17 +107,12 @@ backup-retention:
     hourly: 48
     daily: 185
 
-# routes:
-#   autogenerate:
-#     enabled: false
+routes:
+  autogenerate:
+    enabled: false
 
 environments:
   test6:
-    routes:
-      - nginx:
-        - testroute.test6.amazee.io:
-            tls-acme: 'false'
-            insecure: Allow
     cronjobs:
       - name: drush crondemonium
         schedule: "*/30 * * * *"
