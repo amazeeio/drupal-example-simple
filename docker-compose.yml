@@ -66,6 +66,11 @@ services:
       - amazeeio-network
       - default
 
+  nodeservice:
+    image: bomoko/testnode
+    labels:
+      lagoon.type: node
+
   php:
     build:
       context: .
