@@ -27,6 +27,10 @@ tasks:
         command: env
         service: cli
     - run:
+        name: echo hi
+        command: echo hi
+        service: cli
+    - run:
         name: drush updb
         command: drush -y updb
         service: cli
